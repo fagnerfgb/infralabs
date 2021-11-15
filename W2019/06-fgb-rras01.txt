@@ -1,0 +1,82 @@
+#Autor: Fagner Geraldes Braga
+#Data de criação: 15/11/2021
+#Data de atualização: 15/11/2021
+#Versão: 0.01
+******************************************************************************************
+Serviço de Roteamento
+******************************************************************************************
+Usuário: Administrador
+Senha: Xtr3m3!
+******************************************************************************************
+PLACA DE REDE 192.168.100.0 (REDE HOST-ONLY 2)
+IP: 192.168.100.254
+MÁSCARA: 255.255.255.0
+******************************************************************************************
+PLACA DE REDE 192.168.200.0 (REDE HOST-ONLY 3)
+IP: 192.168.200.254
+MÁSCARA: 255.255.255.0
+******************************************************************************************
+PLACA DE REDE INTERNET (BRIDGE)
+******************************************************************************************
+Habiltar Solicitação de Eco-ICMPv4 no Firewall
+******************************************************************************************
+Abra o Windows Defender Firewall com Segurança Avançada
+Vá em Regras de Entrada
+Localize a opção "Compartilhamento de Arquivo e Impressora (Solicitação de Eco - ICMPv4-In)
+Clique com o botão direito do mouse e habilite a Regra
+Verifique se o servidor FGB-DC-01 consegue pingar o servidor RRAS
+******************************************************************************************
+Instalação do RRAS
+******************************************************************************************
+Em Gerenciador do Servidor, clique em "Gerenciar" e depois em "Adicionar Funções e Recursos"
+Clique em Próximo
+Selecione "Instalação baseada em função ou recurso" e clique em Próximo
+Selecione "Selecionar um servidor no pool de servidor" e clique em Próximo
+Marque a função "Acesso Remoto" e clique em Próximo
+Clique em Próximo
+Clique em Próximo
+Selecione a opção "Roteamento"
+Clique em "Adicionar Recursos"
+Clique em Próximo
+Clique em Próximo
+Clique em Próximo
+Clique em Instalar
+Clique em Fechar
+******************************************************************************************
+Configuração do RRAS
+******************************************************************************************
+Em Gerenciador do Servidor, clique em "Ferramentas" e depois em "Roteamento e Acesso Remoto"
+Clique com o botão direito no Servidor RRAS (FGB-RRAS-01) e clique em "Configurar e Habilitar Roteamento e Acesso Remoto"
+Clique em avançar
+Selecione a opção "Configuração personalizada" e clique em avançar
+Selecione a opção "Roteamento da LAN" e clique em avançar
+Clique em Concluir
+Clique em "Iniciar serviço"
+******************************************************************************************
+Configuração do Acesso a Internet (NAT)
+******************************************************************************************
+Em Roteamento e Acesso Remoto em IPv4, Geral, clique com o botão direito do mouse em "Novo protocolo de Roteamento"
+Selecione a opção "NAT" e clique em OK
+Clique com o botão direito do mouse na opção NAT e clique em "Nova Interface"
+Clique na interface "INTERNET" e depois clique em OK
+Selecione a opção "Interface pública conectada à Internet", depois habilite a opção "Habilitar NAT nesta interface" e clique em OK
+******************************************************************************************
+Selecione a opção "NAT" e clique em OK
+Clique com o botão direito do mouse na opção NAT e clique em "Nova Interface"
+Clique na interface "REDE 192.168.100.0" e depois clique em OK
+Selecione a opção "Interface particular conectada à uma rede privada" e clique em OK
+******************************************************************************************
+Selecione a opção "NAT" e clique em OK
+Clique com o botão direito do mouse na opção NAT e clique em "Nova Interface"
+Clique na interface "REDE 192.168.200.0" e depois clique em OK
+Selecione a opção "Interface particular conectada à uma rede privada" e clique em OK
+******************************************************************************************
+Valide se os outros computadores da rede 192.168.100.0 já conseguem acessar à internet
+
+
+
+
+
+
+
+

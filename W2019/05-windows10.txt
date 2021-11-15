@@ -1,0 +1,22 @@
+#Autor: Fagner Geraldes Braga
+#Data de criação: 15/11/2021
+#Data de atualização: 15/11/2021
+#Versão: 0.01
+******************************************************************************************
+Configurando o Windows 10
+******************************************************************************************
+Usuário: suporte
+Senha: suporte
+Nome do computador: GRU-WS01
+Nome do computador: OSC-WS01
+Computador já pegou endereço IP atribuído pelo servidor DHCP
+Reiniciar computador
+Ingressar computador no domínio
+Nome do domínio: FGB
+Reiniciar computador
+******************************************************************************************
+Usuários e Computadores do Active Directory
+Mover computador para a OU Desktops
+Habilitar usuário fagner.braga
+Logar com o usuário fagner.braga
+ 

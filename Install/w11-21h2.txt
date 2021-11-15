@@ -1,0 +1,111 @@
+#Autor: Fagner Geraldes Braga
+#Data de criação: 07/11/2021
+#Data de atualização: 08/11/2021
+#Versão: 0.01
+******************************************************************************************
+TEMPLATE-W11
+Windows 11 Pro 21H2
+RAM: 4GB
+HD: 80GB - VDI
+******************************************************************************************
+Guia Geral
+Avançado
+Área de Transferência Compartilhada: Bi-direcional
+Arrastar e Soltar: Bi-direcional
+******************************************************************************************
+Guia Sistema
+Placa-Mãe: Habilitar EFI
+Processador: 
+    2 CPUs
+******************************************************************************************    
+Guia Armazenamento
+Disco Rígido SATA 0 - Drive de estado sólido
+Drive Óptico - Apontar caminho da ISO do Windows 11
+******************************************************************************************
+Guia Áudio
+Desmarcar opção Habilitar Áudio
+******************************************************************************************
+Guia Rede
+Adaptador 1 - Habilitar Placa de Rede (Modo Bridge)
+******************************************************************************************
+Instalar Windows 11 Pro
+Montar iso dos Adicionais para Convidado do VirtualBox para executar chave de registro e realizar Bypass das configurações exigidas pelo Windows 11
+Pressionar as teclas Shift + F10 para abrir o prompt de comando
+Digitar D: e pressionar enter
+Executar o comando windows11-bypass.reg e pressionar Enter
+Pressionar o botão Sim
+Digitar exit no prompt de comando e pressionar Enter
+Montar novamente a ISO do Windows 11
+Instalação Personalizada
+Particionar disco de acordo com a necessidade
+Depois que o computador reiniciar e solicitar a escolha da região, digite Ctrl + Shift + F3 (Modo de Auditoria)
+******************************************************************************************
+Adicionais para Convidado do VirtualBox
+Instalar CD dos Adicionais para Convidado do VirtualBox
+Reiniciar o computador
+******************************************************************************************
+Plano de Energia
+Abrir o Prompt de Comando como Administrador e executar o comando abaixo (Criar Plano de Energia para Desempenho Máximo):
+powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+Depois vá em Configurações, Sistema, Energia e suspensão
+Em Tela, marque "Nunca" e depois clique em Configurações de energia adicionais
+Escolha a opção Desempenho Máximo
+******************************************************************************************
+Ativar/Desativar Recursos do Windows
+Ativar .NET Framework 3.5 (inclui .NET 2.0 e 3.0)
+Desativar Internet Explorer 11
+Desativar Recursos de Mídia
+******************************************************************************************
+Windows Update
+Baixar e Instalar Atualizações disponíveis
+******************************************************************************************
+UAC
+Nunca notificar
+******************************************************************************************
+Propriedades do Sistema (Windows Pause + Break)
+Guia Avançado, Desempenho - Ajustar para obter um melhor desempenho
+Guia Proteção do Sistema - Ativar e alocar 10% do disco
+Guia Remoto
+    Desabilitar Assistência Remota
+    Marcar Permitir conexões remotas com este computador
+******************************************************************************************
+Aplicativos
+    Firefox
+    VLC
+    K-Lite Codecs
+    7-Zip
+    Visual Studio Code
+    Free Office
+******************************************************************************************
+Limpeza de Disco
+******************************************************************************************
+Sysprep
+Executar Sysprep
+C:\Windows\System32\Sysprep\sysprep.exe
+Entrar na Configuração inicial pelo usuário do sistema (OOBE)
+Marcar a opção Generalizar
+Em opções de Desligamento escolher a opção Desligar
+******************************************************************************************
+Alterar placa de rede da VM para rede interna
+Exportar máquina virtual para futuros laboratórios
+******************************************************************************************
+Importar VM
+Dar um duplo clique no arquivo de extensão ova para importar a VM para o VirtualBox
+Iniciar VM
+******************************************************************************************
+Windows
+Criar Usuário
+Usuário: Suporte
+Senha: suporte
+Renomear computador
+Habilitar Proteção do Sistema
+Inserir computador no domínio
+******************************************************************************************
+
+
+
+
+
+
+
+
