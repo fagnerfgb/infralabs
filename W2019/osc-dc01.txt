@@ -1,0 +1,39 @@
+#Autor: Fagner Geraldes Braga
+#Data de criação: 15/11/2021
+#Data de atualização: 15/11/2021
+#Versão: 0.01
+******************************************************************************************
+OSC-DC01
+IP: 192.168.200.1
+Máscara: 255.255.255.0
+Gateway: 192.168.200.254
+DNS1: 192.168.200.1
+DNS2: 192.168.100.1
+******************************************************************************************
+Ingressar o computador no Domínio
+Em Gerenciador do Servidor, clique em Gerenciar e depois em Adicionar Funções e Recursos
+Clique em Próximo
+Selecione "Instalação baseada em função ou recurso" e clique em Próximo
+Selecione "Selecionar um servidor no pool de servidor" e clique em Próximo
+Marque a função "Serviços de Domínio do Active Directory" e clique em Próximo
+Clique no botão "Adicionar Recursos"
+Clique em Próximo
+Clique em Próximo
+Clique em Próximo
+Clique em Instalar
+Finalizada a instalação, clique em "Promover este servidor a um controlador de domínio"
+Selecione a opção "Adicionar um controlador de domínio a um domínio existente", 
+Verifique se o domínio está correto, clique em Alterar e insira as credencias do administrador do domínio
+Clique em Próximo
+Marque as opções Servidor DNS e Catálogo Global
+Site: OSC
+Senha Modo de Restauração dos Serviços de Diretório: Xtr3m3!
+Clique em Próximo
+Clique em Próximo
+Replicar de: GRU-DC01.FGB.LOCAL
+Clique em Próximo
+Clique em Próximo
+Clique em Próximo
+Cliquem em Instalar
+******************************************************************************************
+Remover endereço DNS 127.0.0.1
