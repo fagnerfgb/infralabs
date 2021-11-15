@@ -37,4 +37,4 @@ Clique em Próximo
 Cliquem em Instalar
 ******************************************************************************************
 Remover endereço DNS 127.0.0.1
-Adicionar entrada DNS secundária no OSC-DC01 192.168.200.2
+

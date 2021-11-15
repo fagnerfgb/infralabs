@@ -37,5 +37,4 @@ Clique em Próximo
 Cliquem em Instalar
 ******************************************************************************************
 Remover endereço DNS 127.0.0.1
-Adicionar entrada DNS secundária no GRU-DC01 192.168.100.2
 

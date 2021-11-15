@@ -8,7 +8,6 @@ IP: 192.168.100.1
 Máscara: 255.255.255.0
 Gateway: 192.168.100.254
 DNS1: 192.168.100.1
-DNS2
 ******************************************************************************************
 Adicionar Função de Serviço de Domínio do Active Directory
 Promover este servidor a um controlador de domínio
