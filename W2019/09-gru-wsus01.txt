@@ -1,7 +1,7 @@
 #Autor: Fagner Geraldes Braga
 #Data de criação: 15/11/2021
-#Data de atualização: 15/11/2021
-#Versão: 0.01
+#Data de atualização: 21/11/2021
+#Versão: 0.02
 ******************************************************************************************
 Instalação e Configuração do WSUS
 Criar um disco para receber as atualizações 100GB
@@ -133,10 +133,91 @@ Na OU DESKTOPS, criar a GPO GPO-COMP-WSUS-DESKTOPS
 Clique na GPO criada e depois clique em Detalhes. Em Status da GPO selecione Configurações de Usuário Desabilitadas
 Clique com o botão direito na GPO e clique em Editar
 Vá em Configurações do Computador, Políticas, Modelos Administrativos, Componentes do Windows, Windows Update
-Clique em Especificar o local do serviço de atualização na intranet da Microsoft e selecione a opção Habilitado
+******************************************************************************************
+1-
+Habilitar: Especificar o local do serviço de atualização na intranet da Microsoft
 Configurar o serviço de atualização da intranet para detectar atualizações: http://GRU-WSUS01:8530
 Configure as estatísticas do servidor intranet: http://GRU-WSUS01:8530
 ******************************************************************************************
+2-
+Habilitar: Frequência de detecção de Atualizações Automáticas
+Intervalo: 22 horas
+******************************************************************************************
+3-
+Habilitar: Configurar Atualizações Automáticas
+4- Baixar automaticamente e agendar a instalação
+4- Toda quarta-feira
+15:00
+******************************************************************************************
+4-
+Não exibir a opção "Instalar Atualizações e Desligar" na caixa de diálogo Desligar o Windows
+******************************************************************************************
+Instalar .NET Framework 2.0
+******************************************************************************************
+Abrir o Server Manager
+Adicionar funções e recursos
+Próximo
+Próximo
+Próximo
+Próximo
+Recursos do .NET Framework 3.5
+	.NET Framework 3.5 (inclui .NET 2.0 e 3.0)
+Próximo
+Instalar
+******************************************************************************************
+Instalar 
+Microsoft System CLR Types para SQL 2012
+Microsoft Report Viewer 2012 Runtime
+******************************************************************************************
+Aprovação de Updates Críticos
+******************************************************************************************
+Abrir o WSUS
+Clicar em Atualizações Críticas
+Clicar em Pesquisar e Digitar Windows 10
+Selecionar todas as atualizações e clicar em Aprovar
+Selecionar o Grupo WIN10-HOM
+Aprovar para Instalação e depois clicar em OK
+Clique em Fechar e depois em Fechar novamente
+Mover as estações de trabalho que serão usadas para homologação para o Grupo WIN10-HOM
+******************************************************************************************
+Importar Atualizações do Catálogo da Microsoft
+Abrir o WSUS
+Clique no menu com o nome do seu servidor WSUS
+No canto direito da tela, clique em Importar Atualizações paa abrir o Catálogo Microsoft Update
+Clique no botão Instalar
+Clique em Instalar
+Pesquise pelo KB desejado
+Depois de encontrá-lo, clique em Adicionar
+Clique em Ver cesto
+Marque a opção "Importar diretamente para Windows Server Update Services e clique em Importar
+A Atualização estará disponível para você no WSUS
+******************************************************************************************
+Gerenciar Computadores no WSUS com GPO
+Abrir o WSUS
+Clicar em Opções
+Computadores
+Usar Política de Grupo ou configurações do Registro em computadores
+******************************************************************************************
+Acesse o gpmc.msc no servidor GRU-DC01
+Edite a GPO GPO-COMP-WSUS-DESKTOPS
+Vá em Configurações do Computador, Políticas, Modelos Administrativos, Componentes do Windows, Windows Update
+Habilitar: Habilitar destino do lado cliente
+Nome do Grupo: WIN10-PROD
+******************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
