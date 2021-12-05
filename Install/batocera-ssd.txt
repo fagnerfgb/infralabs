@@ -1,7 +1,7 @@
 #Autor: Fagner Geraldes Braga
 #Data de criação: 04/12/2021
-#Data de atualização: 04/12/2021
-#Versão: 0.01
+#Data de atualização: 05/12/2021
+#Versão: 0.02
 ******************************************************************************************
 Batocera no SSD Externo
 ******************************************************************************************
@@ -29,4 +29,6 @@ Atualizar as informações das roms usando screenscraper
 Baixei o tema do Dragon Ball
 Atualizar a lista de jogos
 ******************************************************************************************
-Agora é garimpar mais bios e roms e se divertir
+A partição SHARE foi redimensionada para 32GB porque o espaço de 16GB era insuficiente para as capas, vídeos, etc do screenscraper
+Utilizado o software Gparted do Linux Mint para redimensionar a partição
+A atualização com screenscraper não foi concluída. Foi atingido o máximo de utilização. Continuar no próximo dia
