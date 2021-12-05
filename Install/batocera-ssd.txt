@@ -1,0 +1,32 @@
+#Autor: Fagner Geraldes Braga
+#Data de criação: 04/12/2021
+#Data de atualização: 04/12/2021
+#Versão: 0.01
+******************************************************************************************
+Batocera no SSD Externo
+******************************************************************************************
+Fazer o Backup dos dados contidos no SSD
+******************************************************************************************
+Fazer o download da imagem do Batocera
+https://updates.batocera.org/x86_64/stable/last/batocera-x86_64-32-20210920.img.gz
+******************************************************************************************
+Fazer o download e instalação do balenaEtcher
+https://www.balena.io/etcher/
+******************************************************************************************
+Realizar o Flash da imagem do batocera para o SSD usando o balenaEtcher
+Inicializar o computador pelo SSD
+Aguardar o Batocera carregar para redimensionar o SSD
+Desligar o computador
+Inicializar o computador com o disco de Boot do Linux Mint
+Redimensionar a partição SHARE para poder usar o SSD para outras finalidades
+A partição SHARE ficou com 16GB para os jogos do Batocera
+Uma nova partição com o restante do espaço do SSD foi criada e formatada como NTFS
+Reiniciar o computador e carregar o Batocera para verificar se ocorre algum problema
+Copiar a pasta rom e a pasta bios do disco do PC para a pasta share do SSD com o Batocera
+Configurar o idioma do Batocera para Português
+Atualizar a lista de jogos
+Atualizar as informações das roms usando screenscraper
+Baixei o tema do Dragon Ball
+Atualizar a lista de jogos
+******************************************************************************************
+Agora é garimpar mais bios e roms e se divertir
