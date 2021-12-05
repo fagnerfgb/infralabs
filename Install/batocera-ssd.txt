@@ -1,7 +1,7 @@
 #Autor: Fagner Geraldes Braga
 #Data de criação: 04/12/2021
 #Data de atualização: 05/12/2021
-#Versão: 0.03
+#Versão: 0.04
 ******************************************************************************************
 Batocera no SSD Externo
 ******************************************************************************************
@@ -33,5 +33,22 @@ A partição SHARE foi redimensionada para 32GB porque o espaço de 16GB era ins
 Utilizado o software Gparted do Linux Mint para redimensionar a partição
 A atualização com screenscraper não foi concluída. Foi atingido o máximo de utilização. Continuar no próximo dia
 ******************************************************************************************
-Baixeis as Bios que estavam faltando
+Baixei as Bios que estavam faltando
 Baixei a ROM do God of War do PS2 e funcionou sem problemas.
+******************************************************************************************
+Configurações Menu Scrape
+Banco de Dados: Screenscraper
+Fonte da Imagem: Screenshot
+Fonte da Caixa: Caixa 2D
+Fonte do Logotipo: Logotipo
+Obter Avaliações: ON
+Obter Vídeos: ON
+Obter Fanart: ON
+Obter parte de trás da Caixa: ON
+Obter Mapa: OFF
+Obter Manual: OFF
+Obter Configuração do Controle e Teclado: ON
+Usuário: inserir usuário
+Senha: inserir senha
+******************************************************************************************
+
