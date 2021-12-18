@@ -1,8 +1,9 @@
-#Autor: Fagner Geraldes Braga
-#Data de criação: 07/11/2021
-#Data de atualização: 08/11/2021
-#Versão: 0.01
-******************************************************************************************
+#Autor: Fagner Geraldes Braga  
+#Data de criação: 07/11/2021  
+#Data de atualização: 18/12/2021  
+#Versão: 0.02  
+***
+```bash
 dnf install bsdtar  bzip2 curl wget tar zip nano sudo -y
 systemctl start firewalld
 firewall-cmd --state
@@ -62,4 +63,5 @@ sudo -u apache php bin/console glpi:system:check_requirements
 
 sudo -u apache php bin/console db:install -u glpi -d glpi -p 123456 -L pt_BR -vvv
 mv /var/www/html/glpi/install/install.php /tmp
+```
 
