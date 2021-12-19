@@ -25,7 +25,7 @@ Memória de Vídeo: 128MB
 ***    
 Guia Armazenamento  
 Disco Rígido SATA 0 - Drive de estado sólido  
-Drive Óptico - Apontar caminho da ISO do Linux Mint  
+Drive Óptico - Apontar caminho da ISO do Linux Ubuntu 
 ***
 Guia Áudio  
 Desmarcar opção Habilitar Áudio  
