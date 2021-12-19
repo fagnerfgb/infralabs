@@ -1,7 +1,7 @@
 #Autor: Fagner Geraldes Braga  
-#Data de criação: 08/11/2021  
-#Data de atualização: 18/12/2021  
-#Versão: 0.01
+#Data de criação: 18/12/2021  
+#Data de atualização: 19/12/2021  
+#Versão: 0.02
 ***  
 # Formatação de computadores
 
