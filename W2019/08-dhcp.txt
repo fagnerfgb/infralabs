@@ -30,7 +30,7 @@ Nome: Rede-Cabeada
 Descrição: DHCP para estações de trabalho conectadas via cabo de rede
 Clique em avançar
 Endereço IP Inicial: 192.168.200.30
-Endereço IP Final: 192.168.200.252
+Endereço IP Final: 192.168.200.200
 Clique em avançar
 Clique em avançar
 Duração da concessão: 30 dias
