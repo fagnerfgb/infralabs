@@ -101,10 +101,11 @@ Distribuição das Atualizações
 2- Escolher computadores não críticos ou específicos para testes
 3- Aplicar updates críticos e aguardar uma semana para saber se ocorreu algum problema
 4- Aplicar os demais updates de segurança e aguardar uma semana para saber se ocorreu algum problema
-5- Criar documento GMUD
 ******************************************************************************************
-WIN10-HOM
-WIN10-PROD
+WIN10-X64-HOMOLOGACAO
+WIN10-X64-PRODUCAO
+WIN7-X64-HOMOLOGACAO
+WIN7-X64-PRODUCAO
 ******************************************************************************************
 Portas usadas pelo WSUS
 Portas 80, 443 Site Padrão
@@ -129,7 +130,17 @@ Verificar que o WSUS está num site Personalizado
 ******************************************************************************************
 Configurar GPO
 No servidor GRU-DC01, abrir o GPMC.msc
-Na OU DESKTOPS, criar a GPO GPO-COMP-WSUS-DESKTOPS
+Na OU DESKTOPS, criar as GPOs 
+GPO-COMP-WSUS-W10-1709
+GPO-COMP-WSUS-W10-1803
+GPO-COMP-WSUS-W10-1809
+GPO-COMP-WSUS-W10-1903
+GPO-COMP-WSUS-W10-1909
+GPO-COMP-WSUS-W10-2004
+GPO-COMP-WSUS-W10-20H2
+GPO-COMP-WSUS-W10-21H1
+GPO-COMP-WSUS-W10-21H2
+GPO-COMP-WSUS-W7
 Clique na GPO criada e depois clique em Detalhes. Em Status da GPO selecione Configurações de Usuário Desabilitadas
 Clique com o botão direito na GPO e clique em Editar
 Vá em Configurações do Computador, Políticas, Modelos Administrativos, Componentes do Windows, Windows Update
@@ -204,6 +215,37 @@ Vá em Configurações do Computador, Políticas, Modelos Administrativos, Compo
 Habilitar: Habilitar destino do lado cliente
 Nome do Grupo: WIN10-PROD
 ******************************************************************************************
+Gerenciamento de Computadores no WSUS com GPO e Filtro WMI
+Acesse o gpmc.msc no servidor GRU-DC01
+Edite a GPO GPO-COMP-WSUS-DESKTOPS
+Vá em Configurações do Computador, Políticas, Modelos Administrativos, Componentes do Windows, Windows Update
+Habilitar: Habilitar destino do lado cliente
+Nome do Grupo: WIN10-PROD
+
+W10-21H2
+select * from Win32_OperatingSystem WHERE Version like "10.0.19044" AND ProductType="1"
+W10-21H1
+select * from Win32_OperatingSystem WHERE Version like "10.0.19043" AND ProductType="1"
+W10-20H2
+select * from Win32_OperatingSystem WHERE Version like "10.0.19042" AND ProductType="1"
+W10-2004
+select * from Win32_OperatingSystem WHERE Version like "10.0.19041" AND ProductType="1"
+W10-1909
+select * from Win32_OperatingSystem WHERE Version like "10.0.18363" AND ProductType="1"
+W10-1903
+select * from Win32_OperatingSystem WHERE Version like "10.0.18362" AND ProductType="1"
+W10-1809
+select * from Win32_OperatingSystem WHERE Version like "10.0.17763" AND ProductType="1"
+W10-1803
+select * from Win32_OperatingSystem WHERE Version like "10.0.17134" AND ProductType="1"
+W10-1709
+select * from Win32_OperatingSystem WHERE Version like "10.0.16299" AND ProductType="1"
+Windows 7 
+select * from Win32_OperatingSystem WHERE Version like "6.1%" AND ProductType="1"
+
+
+
+
 
 
 
