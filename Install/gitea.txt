@@ -192,25 +192,3 @@ Senha: 123@senac
 Nome do banco de dados: gitea
 Domínio do servidor: 192.168.56.10
 URL base do Gitea: http://192.168.56.10:3000/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
