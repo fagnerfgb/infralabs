@@ -443,3 +443,9 @@ setInterval(app.update, 10000);
 
 O problema foi resolvido.
 Caso o problema persista, limpe o cache do navegador. 
+
+Fontes:
+http://novosga.org/
+https://ezectech.com/tutorial/instalacaonovo-sga-2-0-passo-a-passo-no-windows-10/
+https://discuss.novosga.org/d/179-demora-para-chamar-senha-painel-web-2-0/17
+https://github.com/novosga/novosga/issues/318
