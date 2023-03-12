@@ -67,7 +67,7 @@ Confirm password: 123@senac
 Servidor srv-rockylinux 
 Abrir a mídia do Backup Exec, abrir a pasta Unix e copiar o arquivo RALUS_RMALS-1193.1338.tar.gz para o servidor Ubuntu  
 Utilisei o webmin para realizar o processo  
-https://192.168.56.14:11000  
+https://192.168.56.13:11000  
 User: root  
 Password: 123@senac  
 

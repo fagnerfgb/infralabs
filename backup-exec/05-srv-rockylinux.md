@@ -32,8 +32,7 @@ Guia Áudio
 Desmarcar opção Habilitar Áudio  
 ***
 Guia Rede  
-Adaptador 1 - Modo Bridge  
-Adaptador 2 - Host-only (192.168.56.14)  
+Adaptador 1 - Host-only (192.168.56.13)  
 ***
 Instalação do Rocky Linux 9.1  
 English, English (United States) - Continue
@@ -43,13 +42,13 @@ Time & Date
 Region: Americas City: Sao Paulo - Done
   
 Network & Hostname 
-enp0s8 
+enp0s3 
 Configure  
 IPv4 Settings  
 Method: Manual  Add  
-Address: 192.168.56.14  
+Address: 192.168.56.13  
 Netmask 24  
-Gateway:    
+Gateway: 192.168.56.254   
 DNS servers: 192.168.56.11  
 Search domains: grupo2.intra  
 Save  
@@ -74,22 +73,27 @@ Reboot System
 systemctl enable --now cockpit.socket  
 yum update -y  
 
-dnf -y install perl perl-Net-SSLeay perl-Encode-Detect   
+dnf -y install perl perl-Net-SSLeay perl-Encode-Detect libnsl  
 dnf -y install  http://download.webmin.com/download/yum/webmin-2.013-1.noarch.rpm  
 vim /etc/webmin/miniserv.conf   
 port 11000  
-
+listen 11000  
 systemctl restart webmin   
-firewall-cmd --add-port=11000/tcp  
-firewall-cmd --add-port=10000/tcp  
-firewall-cmd --runtime-to-permanent   
-
+firewall-cmd --add-port=11000/tcp --permanent  
+firewall-cmd --add-port=10000/tcp --permanent  
+firewall-cmd --add-port=6101/tcp --permanent  
+firewall-cmd --add-port=3527/tcp --permanent  
+firewall-cmd --add-port=6106/tcp --permanent  
+firewall-cmd --add-port=5633/tcp --permanent  
+firewall-cmd --add-port=50104/tcp --permanent  
+firewall-cmd --add-port=10082/tcp --permanent  
+firewall-cmd --add-port=10102/tcp --permanent  
+firewall-cmd --add-port=60000-61000/tcp --permanent 
+***
 Inserindo servidor srv-rockylinux no domínio  
 dnf -y install realmd sssd oddjob oddjob-mkhomedir adcli samba-common-tools krb5-workstation   
-nmcli connection modify enp0s8 ipv4.dns 192.168.56.11  
+nmcli connection modify enp0s3 ipv4.dns 192.168.56.11  
 realm discover GRUPO2.INTRA  
 realm join GRUPO2.INTRA -U thanos  
 realm list  
 
-Necessário para o funcionamento do agente do Backup Exec
-dnf -y install libnsl 

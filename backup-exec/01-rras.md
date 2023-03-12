@@ -1,6 +1,6 @@
 #Autor: Fagner Geraldes Braga  
-#Data de criação: 11/03/2023  
-#Data de atualização: 11/03/2023  
+#Data de criação: 12/03/2023  
+#Data de atualização: 12/03/2023  
 #Versão: 0.01  
 ******************************************************************************************
 Windows Server 2002 Standard  
@@ -25,13 +25,13 @@ Tela - Desmarcar Habilitar Aceleração 3D
 ******************************************************************************************  
 Guia Armazenamento  
 Disco Rígido SATA 1 - Drive de estado sólido HD: 60GB - VDI (Sistema)  
-Disco Rígido SATA 2 - Drive de estado sólido HD: 50GB - VDI (Backup)  
 ******************************************************************************************
 Guia Áudio  
 Desmarcar opção Habilitar Áudio  
 ******************************************************************************************
 Guia Rede  
-Adaptador 1 - Host-only (192.168.56.12)  
+Adaptador 1 - Habilitar Placa de Rede (Modo Bridge) - Internet  
+Adaptador 2 - Host-only (192.168.56.254)  
 ******************************************************************************************
 Instalar Windows Server 2022 Standard (Experiência Desktop)  
 Instalação Personalizada  
@@ -66,49 +66,26 @@ Windows
 Usuário: Administrator  
 Senha: 123@senac  
 ******************************************************************************************
-Copiar pasta BEX em C:\ 
-Executar o arquivo share.reg  
 Abrir o Powershell ISE como Administrador e executar os scripts na seguinte ordem:  
 00-config.ps1  
-01-dominio.ps1 
+01-rras.ps1  
 ******************************************************************************************
-Instalação Backup Exec  
-English  
-Install Products  
-Backup Exec  
-I accept the terms of the license agreement.  
-Typical installation  
+Habilitar Solicitação de Eco-ICMPv4 no Firewall  
+******************************************************************************************
+Abra o Windows Defender Firewall com Segurança Avançada  
+Vá em Regras de Entrada  
+Localize a opção "Compartilhamento de Arquivo e Impressora (Solicitação de Eco - ICMPv4-In)  
+Clique com o botão direito do mouse e habilite a Regra  
+Verifique se o servidor GRU-DC01 consegue pingar o servidor RRAS  
+******************************************************************************************
+Documentar Roteamento e NAT  
 
-User name: grupo2\thanos  
-Password: 123@senac  
-******************************************************************************************
-Criação do storage para armazenamento do Backup  
-Abrir Veritas Backup Exec  
-Storage  
-Configure Storage  
-Disk-base Storage  
-Disk storage  
-Name: Backup em Disco  
-Description: Unidade de Armazenamento para realização de backup em disco dos servidores  
 
-Local disk: F:  
-Concurrent write operations: 8  
-******************************************************************************************
-Criação do storage de Rede para armazenamento do Backup  
-Abrir Veritas Backup Exec  
-Storage  
-Configure Storage  
-Disk-base Storage  
-Disk storage  
-Name: Backup em Rede - srv-ubuntu  
-Description: /home/samba/bkp 
 
-Network Share: \\srv-ubuntu\bkp  
-Concurrent write operations: 8  
-******************************************************************************************
-Liberação de Portas  
-Abrir Veritas Backup Exec    
-Configuration and Settings  
-Backup Exec Settings  
-Network and Security  
-Enable TCP dynamic port range: 60000 - 61000  
+
+
+
+
+
+
+

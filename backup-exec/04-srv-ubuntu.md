@@ -186,10 +186,15 @@ sudo vim /etc/webmin/miniserv.conf
 port=11000  
 
 sudo systemctl restart webmin  
-sudo ufw allow 11000  
+sudo ufw allow 11000/tcp 
 ***
 sudo vim /etc/hosts  
 127.0.0.1 srv-ubuntu.grupo2.intra srv-ubuntu  
+***
+Liberações no firewall
+sudo ufw allow 10000/tcp 
+sudo ufw allow 60000:61000/tcp
+
 ***
 sudo apt-get update  
 sudo apt-get install krb5-user samba sssd sssd-tools libnss-sss libpam-sss ntp ntpdate realmd adcli -y  
@@ -203,8 +208,68 @@ sudo systemctl start ntp
 ***
 sudo realm discover GRUPO2.INTRA  
 ***
-sudo kinit -V thanos@GRUPO2.INTRA  
+kinit -V thanos@GRUPO2.INTRA  
 ***
-realm join --verbose GRUPO2.INTRA -U 'thanos@GRUPO2.INTRA' --install=/  
+sudo realm join --verbose GRUPO2.INTRA -U 'thanos@GRUPO2.INTRA' --install=/  
 
-https://learn.microsoft.com/pt-br/azure/active-directory-domain-services/join-ubuntu-linux-vm
+https://learn.microsoft.com/pt-br/azure/active-directory-domain-services/join-ubuntu-linux-vm  
+***
+Compartilhamento de pasta  
+sudo apt update  
+sudo apt install samba -y  
+
+Abrir o webmin  
+System, Users and Groups    
+Create a new user  
+Username: samba  
+Real name: samba  
+Normal password: 123@senac  
+Primary Group, Existing group: users  
+Create button  
+
+Servers, Samba Windows File Sharing, Samba users, Convert users  
+Selecione: Only listed users or UID ranges e insira o usuário samba  
+Selecione: Use this password: e insira a senha: 123@senac  
+Convert  
+
+Criar pasta  
+Tools, File Manager  
+Ir até /home/samba  
+File, Create new directory  
+bkp, create  
+
+Servers, Samba Windows File Sharing  
+Create a new file share  
+Share name: bkp  
+Directory to share: /home/samba/bkp  
+Create with owner: samba  
+Create with group: users  
+Create  
+
+Em Share Name, clique em bkp  
+Clique em Security and Access Control  
+Writable? Yes  
+Valid users: samba  
+Save  
+Save  
+
+sudo vim /etc/samba/smb.conf  
+Na seção [global] adicionar as linhas abaixo:  
+follow symlinks = yes  
+wide links = yes  
+unix extensions = no  
+
+Servers, Samba Windows File Sharing, Windows Networking  
+Workgroup: grupo2.intra  
+WINS mode: Be WINS server  
+Save  
+
+Servers, Samba Windows File Sharing, Windows Networking  
+Restart Samba Servers  
+
+sudo ufw allow 445/tcp  
+sudo ufw allow 137/udp  
+sudo ufw allow 138/udp  
+sudo ufw allow 139/tcp  
+sudo ufw disable  
+sudo ufw enable  

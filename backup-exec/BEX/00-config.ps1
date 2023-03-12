@@ -17,7 +17,7 @@ Remove-NetIPAddress -InterfaceIndex 6 -Confirm:$false
 <#Remova qualquer configuração DNS do adaptador de rede.#>
 Remove-NetRoute -InterfaceIndex 6 -Confirm:$false
 <#Configure um endereço IP estático em uma interface de rede.#>
-New-NetIPAddress -InterfaceIndex 6 -IPAddress 192.168.56.12 -AddressFamily IPv4 -PrefixLength 24
+New-NetIPAddress -InterfaceIndex 6 -IPAddress 192.168.56.12 -AddressFamily IPv4 -PrefixLength 24 -DefaultGateway 192.168.56.254
 <#Configure os servidores DNS de um adaptador de rede.#>
 
 Set-DnsClientServerAddress -InterfaceIndex 6 -ServerAddresses ("192.168.56.11")

@@ -1,23 +1,20 @@
-﻿# Abrir o PowerShell como Administrador
-# Executar comando abaixo para instalação do Chocolatey
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-#Instalação básicos para o Servidor
-choco install -Y firefox 7zip.install googlechrome microsoft-edge
-<#Liste todos os adaptadores de rede disponíveis#>
-Get-NetAdapter -Name *
+﻿Get-NetAdapter -Name *
 <#Remova qualquer configuração de endereço IP do adaptador de rede.#>
 Remove-NetIPAddress -InterfaceIndex 5 -Confirm:$false
 <#Remova qualquer configuração DNS do adaptador de rede.#>
 Remove-NetRoute -InterfaceIndex 5 -Confirm:$false
 <#Configure um endereço IP estático em uma interface de rede.#>
-New-NetIPAddress -InterfaceIndex 5 -IPAddress 192.168.56.11 -AddressFamily IPv4 -PrefixLength 24 -DefaultGateway 192.168.56.254
+New-NetIPAddress -InterfaceIndex 5 -IPAddress 192.168.56.254 -AddressFamily IPv4 -PrefixLength 24
 <#Configure os servidores DNS de um adaptador de rede.#>
+
 Set-DnsClientServerAddress -InterfaceIndex 5 -ServerAddresses ("192.168.56.11")
 <#Liste todos os adaptadores de rede com suporte a IPV6.#>
 Get-NetAdapterBinding -ComponentID ms_tcpip6
 <#Desative o IPV6 em um adaptador de rede.#>
-netsh interface set interface "Ethernet" newname="Rede Interna"
+netsh interface set interface "Ethernet" newname="Internet"
+netsh interface set interface "Ethernet 2" newname="Rede Interna"
 Disable-NetAdapterBinding -InterfaceAlias "Rede Interna" -ComponentID ms_tcpip6
+Disable-NetAdapterBinding -InterfaceAlias "Internet" -ComponentID ms_tcpip6
 <#Habilita o Gerenciamento remoto #>
 <#Enable-PSRemoting –force#>
 <#Altera o fuso horário #>
@@ -50,5 +47,5 @@ Set-ItemProperty ‘HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\‘ -
 Set-ItemProperty ‘HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp\‘ -Name “UserAuthentication” -Value 1
 Enable-NetFirewallRule -DisplayGroup “Remote Desktop”
 <#Renomeia o computador#>
-Rename-Computer -NewName dc01 -Restart
+Rename-Computer -NewName rras -Restart
 
