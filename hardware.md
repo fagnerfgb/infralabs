@@ -13,5 +13,3 @@ Dados: CT240BX500SSD1 240GB
 Armazenamento Exteno: Disco SSD ADATA SD600Q 240GB  
 Fonte: XPG Pylon 450W   
 ***
-Virtual Box 6.1.28  
-Oracle VM VirtualBox Extension Pack  
