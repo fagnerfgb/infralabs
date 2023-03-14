@@ -106,5 +106,3 @@ Add
 User name: root  
 Password: 123@senac  
 Confirm password: 123@senac  
-
-

@@ -12,8 +12,8 @@ Set-DnsClientServerAddress -InterfaceIndex 5 -ServerAddresses ("192.168.56.11")
 Get-NetAdapterBinding -ComponentID ms_tcpip6
 <#Desative o IPV6 em um adaptador de rede.#>
 netsh interface set interface "Ethernet" newname="Internet"
-netsh interface set interface "Ethernet 2" newname="Rede Interna"
-Disable-NetAdapterBinding -InterfaceAlias "Rede Interna" -ComponentID ms_tcpip6
+netsh interface set interface "Ethernet 2" newname="Interna"
+Disable-NetAdapterBinding -InterfaceAlias "Interna" -ComponentID ms_tcpip6
 Disable-NetAdapterBinding -InterfaceAlias "Internet" -ComponentID ms_tcpip6
 <#Habilita o Gerenciamento remoto #>
 <#Enable-PSRemoting –force#>
