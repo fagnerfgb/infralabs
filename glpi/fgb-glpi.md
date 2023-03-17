@@ -2,7 +2,7 @@
 #Data de criação: 07/11/2021  
 #Data de atualização: 18/12/2021  
 #Versão: 0.02  
-***
+
 ```bash
 dnf install bsdtar  bzip2 curl wget tar zip nano sudo -y
 systemctl start firewalld
