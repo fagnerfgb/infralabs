@@ -53,8 +53,11 @@
 	* Usuário: Administrator  
 	* Senha: 123@senac 
 ## Abrir o Powershell ISE como Administrador e executar os scripts na seguinte ordem:  
-	* 00-config.ps1  
-## Configurando ADCS
+	* 00-config.ps1 
+	* 01-ca-root.ps1
+
+## Configurando ADCS 
+### Se já tiver executado o script 01-ca-root.ps1 não precisa executar os comandos do bloco CA ROOT STANDALONE
 ### CA ROOT STANDALONE
 	Server Manager–> Manage –> Add Role and Features
 	Role-based or feature-based installation
