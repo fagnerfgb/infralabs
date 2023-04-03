@@ -176,78 +176,59 @@
 	http://localhost/certsrv/Default.asp
 
 ### Emitindo um certificado pelo IIS
-Criar um registro DNS no srv-dc01
-Server Manager, Tools, DNS
-SRV-DC01, Forward Lookup Zones 
-Clicar com o direito em grupo2.intra e selecionar New Host (A or AAAA)
-Name: ca
-IP address: 192.168.10.3
-Add Host
-OK
-Done
+	Criar um registro DNS no srv-dc01
+	Server Manager, Tools, DNS
+	SRV-DC01, Forward Lookup Zones 
+	Clicar com o direito em grupo2.intra e selecionar New Host (A or AAAA)
+	Name: ca
+	IP address: 192.168.10.3
+	Add Host
+	OK
+	Done
 
-Server Manager, Tools, Internet Information Services (IIS) Manager
-SRV-CA-ISSUING1
-Duplo clique em Server Certificates
-Create Certificate Request
-Common name: ca.grupo2.intra
-Organization: GRUPO2
-Organizational unit: Matriz
-City/locality: Sao Paulo
-State/province: SP
-Country/region: BR
-Next
-Cryptographic service provider: Microsoft RSA SChannel Cryptographic Provider
-Bit length: 1024
-Next
-Specify a file name for the certificate request: C:\Scripts\request-ca.grupo2.intra.txt
-Finish
+	Server Manager, Tools, Internet Information Services (IIS) Manager
+	SRV-CA-ISSUING1
+	Duplo clique em Server Certificates
+	Create Certificate Request
+	Common name: ca.grupo2.intra
+	Organization: GRUPO2
+	Organizational unit: Matriz
+	City/locality: Sao Paulo
+	State/province: SP
+	Country/region: BR
+	Next
+	Cryptographic service provider: Microsoft RSA SChannel Cryptographic Provider
+	Bit length: 1024
+	Next
+	Specify a file name for the certificate request: C:\Scripts\request-ca.grupo2.intra.txt
+	Finish
 
-Abrir o arquivo request-ca.grupo2.intra.txt e copiar conteúdo dele
-Abrir o site http://localhost/certsrv/Default.asp
-Clicar em Request a certificate
-Submit an advanced certificate request
-Em Base-64-encoded certificate request (CMC or PKCS #10 or PKCS #7): colar o conteúdo do arquivo request-ca.grupo2.intra.txt
-Certificate Template: Web Server
-Attributes: ca.grupo2.intra
-Submit
-Realizar o download de todos os 4 certificados
-DER encoded certificate: 
-DER encoded certificate chain
-Base 64 encoded certificate
-Base 64 encoded certificate chain
+	Abrir o arquivo request-ca.grupo2.intra.txt e copiar conteúdo dele
+	Abrir o site http://localhost/certsrv/Default.asp
+	Clicar em Request a certificate
+	Submit an advanced certificate request
+	Em Base-64-encoded certificate request (CMC or PKCS #10 or PKCS #7): colar o conteúdo do arquivo request-ca.grupo2.intra.txt
+	Certificate Template: Web Server
+	Attributes: ca.grupo2.intra
+	Submit
+	Realizar o download de todos os 4 certificados
+	DER encoded certificate: 
+	DER encoded certificate chain
+	Base 64 encoded certificate
+	Base 64 encoded certificate chain
 
-Server Manager, Tools, Internet Information Services (IIS) Manager
-SRV-CA-ISSUING1
-Duplo clique em Server Certificates
-Complete Certificate Request
-File name containing the certification authority's response: C:\Scripts\srv-ca-issuing1-der-encoded.cer
-Friendly name: ca.grupo2.intra
-Select a certificate store for the new certificate: Personal
-OK
+	Server Manager, Tools, Internet Information Services (IIS) Manager
+	SRV-CA-ISSUING1
+	Duplo clique em Server Certificates
+	Complete Certificate Request
+	File name containing the certification authority's response: C:\Scripts\srv-ca-issuing1-der-encoded.cer
+	Friendly name: ca.grupo2.intra
+	Select a certificate store for the new certificate: Personal
+	OK
 
-SRV-CA-ISSUING1, Sites, Default Web Site, Bindings
-Add
-Type: https
-SSL certificate: ca.grupo2.intra
-OK
-Close
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
+	SRV-CA-ISSUING1, Sites, Default Web Site, Bindings
+	Add
+	Type: https
+	SSL certificate: ca.grupo2.intra
+	OK
+	Close
