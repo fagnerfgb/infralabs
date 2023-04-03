@@ -1,7 +1,7 @@
 #Autor: Fagner Geraldes Braga  
 #Data de criação: 01/04/2023    
-#Data de atualização: 01/04/2023  
-#Versão: 0.01  
+#Data de atualização: 03/04/2023  
+#Versão: 0.02  
 
 ## Ambiente
 	Domínio: grupo2.intra
@@ -16,3 +16,27 @@
 
 	VM 3: SRV-CA-ISSUING1 (Membro do domínio)
 	192.168.10.3 /24     
+
+## Tipos de certificados
+### Usuários
+	E-mail
+	Usuário
+	EFS
+	Smart Card
+### Computador
+	Servidor Web - HTTPS
+	IPSEC
+	Exchange
+	System Center
+
+## Emissão
+### Manual 
+	MMC
+	Web
+### Automática
+	GPO
+
+## Templates
+	EFS
+	Web
+	IPSEC
