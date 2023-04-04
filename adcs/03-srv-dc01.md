@@ -62,3 +62,13 @@
 	* cria_usuarios.bat  
 ## Abrir o Powershell ISE como Administrador e executar os scripts na seguinte ordem:  
 	* adiciona-usuario-a-grupo.ps1 (Este script apresenta erro ao executar, mas os usuários são atribuídos aos grupos correspodentes)  
+
+### Instalando certificado da CA Root
+No File Explorer, vá em C:\Script e clique com o direito srv-ca-root01 e clique em Install Certificate
+Next
+Place all certificates in the following store
+Browse...
+Trusted Root Certification Authorities
+OK
+Next
+Finish

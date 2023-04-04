@@ -1,7 +1,7 @@
 #Autor: Fagner Geraldes Braga  
 #Data de criação: 01/04/2023  
-#Data de atualização: 01/04/2023  
-#Versão: 0.01  
+#Data de atualização: 04/04/2023  
+#Versão: 0.03  
 
 # Windows Server 2002 Standard  
 
@@ -132,7 +132,7 @@
 	Type: URL Value: www.fagnerbraga.com.br
 	Clique em OK, depois em Enroll e depois em Finish
 
-	Vá para Certicates, Personal, Certificates e dê um duplo clique no certificado emitido: www.fagnerbraga.com.br
+	Vá para Certificates, Personal, Certificates e dê um duplo clique no certificado emitido: www.fagnerbraga.com.br
 	Clique na aba Details, Copy to File...
 	Next
 	Yes, export the private key
@@ -232,3 +232,63 @@
 	SSL certificate: ca.grupo2.intra
 	OK
 	Close
+
+### RFC 2818
+	Emitir certificados usando o IIS não atende a RFC 2818
+	Por isso, deve-se usar o MMC
+
+	Pressione as teclas Winkey + R e digite MMC
+	File Add/Remove Snap-in...
+	Certificates Add>
+	Computer account, Next
+	Local computer, Finish, OK
+	Clique em Certificates, Personal
+	Clique com o direito em Certificates, All Tasks, Request New Certificate
+	Next
+	Next
+	Marque a opção Fagner-WebServer e cliquem em More information is required to enroll for this certificate. Click here to configure settings.
+	Clique na aba General
+	Em Friendly name, insira o nome do seu site: ca.grupo2.intra
+	Clique na aba Subject
+
+	Subject name
+	Type: Common name Value: ca.grupo2.intra		
+	
+	Alternative name
+	Type: DNS Value: ca.grupo2.intra
+	Clique em OK, depois em Enroll e depois em Finish
+
+	Server Manager, Tools, Internet Information Services (IIS) Manager
+	SRV-CA-ISSUING1, Sites, Default Web Site, Bindings
+	Add
+	Type: https
+	SSL certificate: ca.grupo2.intra
+	OK
+	Close
+
+### Instalando certificado da CA Root
+	Após emitir o certificado de Web Server para ca.grupo2.intra e tentar acessar o site https://ca.grupo2.intra/certsrv 
+	de outra máquina, o navegador informa que o certificado não é válido porque a CA Root não é conhecida por ele.
+	Pressione as teclas Winkey + R e digite MMC
+	File Add/Remove Snap-in...
+	Certificates Add>
+	Computer account, Next
+	Local computer, Finish, OK
+	Clique em Certificates, Trusted Root Certification Authorities, Certificates
+	Clique com o direito em SRV-CA-ROOT01, All Tasks, Export
+	Next
+	Cryptographic Message Syntax Standard - PKCS #7 Certificates (.P7B)
+	Marque a opção Include all certificates in the certification path if possible
+	Next
+	File name: C:\Scripts\srv-ca-root01.p7b
+	Next
+	Finish
+	OK
+
+	Copiar certificado srv-ca-root01.p7b para o servidor srv-dc01
+
+	
+
+
+
+	

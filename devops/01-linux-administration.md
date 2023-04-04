@@ -1,7 +1,7 @@
 #Autor: Fagner Geraldes Braga  
 #Data de criação: 02/04/2023  
-#Data de atualização: 02/04/2023  
-#Versão: 0.01
+#Data de atualização: 04/04/2023  
+#Versão: 0.03
 ***
 ## Administração Linux
 ```bash
@@ -93,7 +93,7 @@ vim .profile
 3yy # copia 3 linhas
 y # copiar
 p # colar
-x # remover carácter
+x # remover caracter
 h # cursor para esquerda
 j # cursor para baixo
 k # cursor para cima
@@ -107,6 +107,7 @@ dd # recortar
 ? # localizar de baixo para cima
 : set ignorecase
 : set number
+: set hlsearch #(mostra todos os resultados do conteúdo pesquisado)
 n # next
 
 :w # salvar
