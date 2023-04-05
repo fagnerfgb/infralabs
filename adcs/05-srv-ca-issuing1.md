@@ -287,8 +287,21 @@
 
 	Copiar certificado srv-ca-root01.p7b para o servidor srv-dc01
 
-	
+### Gerando certificado .cer para fazer deploy através de GPO
+	Pressione as teclas Winkey + R e digite MMC
+	File Add/Remove Snap-in...
+	Certificates Add>
+	Computer account, Next
+	Local computer, Finish, OK
+	Clique em Certificates, Trusted Root Certification Authorities, Certificates
+	Duplo clique em SRV-CA-ROOT01
+	Details, Copy to File...
+	Next
+	DER encoded binary X.509 (.CER)
+	File name: C:\Scripts\srv-ca-root01.cer
+	Next
+	Finish
+	OK
+	OK
 
-
-
-	
+	Copiar certificado srv-ca-root01.cer para o servidor srv-dc01	

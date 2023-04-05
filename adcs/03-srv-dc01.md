@@ -72,3 +72,32 @@ Trusted Root Certification Authorities
 OK
 Next
 Finish
+
+### Configurando GPO para deploy de certificados
+	Server Manager, Tools, Group Policy Management
+	Forest: grupo2.intra, Domains, grupo2.intra
+	Clicar com o direito em Group Policy Objects, New
+	Name: GPO-Certificados
+	OK
+	Clicar com o direito em GPO-Certificados, Edit...
+	Computer Configuration/Policies/Security Settings/Public Key Policies
+	Clique com o direito em Trusted Root Certification Authorities, Import
+	Next
+	Browse...
+	C:\Scripts\srv-ca-root01.cer
+	Open
+	Next
+	Next
+	Finish
+	OK
+
+	Clicar com o direito em GPO-Certificados, GPO Status, User Configuration Settings Disabled
+
+### Aplicando GPO nas OUs DESKTOPS e SERVERS
+	Clique com o direito na OU DESKTOPS e depois clique em Link an Existing GPO...
+	Selecione a GPO-Certificados e clique em OK
+
+	Clique com o direito na OU SERVERS e depois clique em Link an Existing GPO...
+	Selecione a GPO-Certificados e clique em OK
+
+
