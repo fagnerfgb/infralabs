@@ -305,3 +305,42 @@
 	OK
 
 	Copiar certificado srv-ca-root01.cer para o servidor srv-dc01	
+
+### Duplicando Template Basic EFS
+	Server Manager, Tools, Certification Authority
+	Clique em SRV-CA-ISSUING1
+	Clique com o direito em Certificate Templates, Manage
+	Clique com o direito em Basic EFS, Duplicate Template
+	Na aba General 
+	Dê um nome para o template: Fagner-EFS
+	Na aba Request Handling
+	Marque a opção Allow private key to be exported e clique em OK
+	Na aba Security
+	Insira o grupo Emissao-Certificado e marque Allow nas opções Read e Enroll
+	Feche o Certificate Templates Console
+### Emitindo o template
+	Clique com o direito em Certificate Templates, New, Certificate Template to Issue
+	Selecione o template gerado no passo anterior: Fagner-EFS e clique em OK
+
+### Trabalhando com auto Enrollment
+	Server Manager, Tools, Certification Authority
+	Clique em SRV-CA-ISSUING1
+	Clique com o direito em Certificate Templates, Manage
+	Clique com o direito em Fagner-EFS, Duplicate Template
+	Na aba General 
+	Dê um nome para o template: Fagner-EFS-v2
+	Validity period: 2 years
+	Na aba Security
+	Selecione o grupo Emissao-Certificado e marque Allow na opção AutoEnroll
+	Na aba Superseded Templates
+	Add
+	Fagner-EFS
+	OK
+	Feche o Certificate Templates Console
+	Para habilitar o Auto Enrollment, criar GPO no srv-dc01
+
+### Lista de Revogação de Certificado
+
+
+
+

@@ -1,7 +1,7 @@
 #Autor: Fagner Geraldes Braga  
 #Data de criação: 01/04/2023  
-#Data de atualização: 01/04/2023  
-#Versão: 0.01  
+#Data de atualização: 05/04/2023  
+#Versão: 0.04  
 
 # Windows Server 2002 Standard  
 
@@ -90,9 +90,6 @@ Finish
 	Next
 	Finish
 	OK
-
-	Clicar com o direito em GPO-Certificados, GPO Status, User Configuration Settings Disabled
-
 ### Aplicando GPO nas OUs DESKTOPS e SERVERS
 	Clique com o direito na OU DESKTOPS e depois clique em Link an Existing GPO...
 	Selecione a GPO-Certificados e clique em OK
@@ -100,4 +97,24 @@ Finish
 	Clique com o direito na OU SERVERS e depois clique em Link an Existing GPO...
 	Selecione a GPO-Certificados e clique em OK
 
+### Criando usuário para testes
+	Como eu já criei uma estrutura no de OUs, Grupos e Usuários no AD que está documentada neste projeto, irei pular esta parte
+	Usuário utilizado: Fagner.Braga
+	Senha: 123@senac
+	Está na OU grupo2.intra/GRUPO2/USERS
+	Crei o grupo Emissao-Certificado e inseri este usuário
+
+### Configurando GPO para Auto Enrollment de certificados
+	Server Manager, Tools, Group Policy Management
+	Forest: grupo2.intra, Domains, grupo2.intra,Group Policy Objects, 
+	Clicar com o direito em GPO-Certificados, Edit...
+	User Configuration/Policies/Security Settings/Public Key Policies
+	Duplo clique em Certificate  Services Client - Auto-Enrollment
+	Enabled
+	Marcar Renew expired certificates, update pending certificates, and remove revoked certificates
+	Marcar Update certificates that use certificate templates
+	OK
+
+	Clique com o direito na OU USERS e depois clique em Link an Existing GPO...
+	Selecione a GPO-Certificados e clique em OK
 

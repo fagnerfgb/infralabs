@@ -1,7 +1,7 @@
 #Autor: Fagner Geraldes Braga  
 #Data de criação: 02/04/2023  
-#Data de atualização: 04/04/2023  
-#Versão: 0.03
+#Data de atualização: 07/04/2023  
+#Versão: 0.04
 ***
 ## Administração Linux
 ```bash
@@ -187,7 +187,7 @@ vim teste &
 # & joga pra segundo plano
 # % joga para primeiro plano
 
-# Mostra os processos parados
+# Mostra os processos em segundo plano
 jobs
 
 # Mostra o processo do VIM
@@ -220,9 +220,4 @@ top
 apt update
 
 apt upgrade
-
-
-
-
-
 ```
