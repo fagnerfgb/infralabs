@@ -161,8 +161,7 @@ vagrant up
 vagrant port controle #2222
 vagrant port web #2200
 vagrant port db #2201
-
-
+vagrant ssh web
 
 
 
