@@ -242,9 +242,9 @@ vagrant snapshot delete master "Teste Snapshot"
 vagrant halt
 
 # No diretório onde está a VM
-vagrant package --base web
+vagrant package --base web --output web
 mv package.box /d/template
-vagrant box add web /d/template/package.box
+vagrant box add web /d/template/web.box
 vagrant box list
 
 Para usar o box criado trocar o nome no campo vm.box no arquivo Vagrantfile
@@ -252,4 +252,20 @@ Para usar o box criado trocar o nome no campo vm.box no arquivo Vagrantfile
 vagrant cloud auth login
 vagrant cloud auth login --check
 vagrant cloud publish fagnerfgb/web 1.0 virtualbox /d/template/package.box -d "Web" --version-description "Debian9" --release --short-description "Debian"
+
+egrep -v "^.*#|^$" Vagrantfile
+
+## Plugin de disco
+https://github.com/sprotheroe/vagrant-disksize
+
+vagrant plugin install vagrant-disksize
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/xenial64"
+  config.disksize.size = "50GB"
+end
+
+.bashrc
+alias vs="vagrant up && vagrant ssh"
+alias vd="vagrant destroy -f"
 ```
