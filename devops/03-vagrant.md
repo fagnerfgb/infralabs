@@ -268,6 +268,4 @@ end
 .bashrc
 alias vs="vagrant up && vagrant ssh"
 alias vd="vagrant destroy -f"
-
-Vai Corinthians
 ```
