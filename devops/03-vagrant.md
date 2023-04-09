@@ -1,7 +1,7 @@
 #Autor: Fagner Geraldes Braga  
 #Data de criação: 08/04/2023    
-#Data de atualização: 08/04/2023  
-#Versão: 0.01
+#Data de atualização: 09/04/2023  
+#Versão: 0.02
 ***
 ## Vagrant
 ```bash
@@ -89,7 +89,7 @@ end
 vagrant status
 
 # Verifica se o Vagrantfile está OK
-vagrant validate controle
+vagrant validate
 
 # Reinicia a VM
 vagrant reload controle
@@ -114,7 +114,7 @@ cd ..
 vim Vagrantfile
 	controle.vm.provision "shell", path: "./scripts/update.sh"
 
-vagrant validate controle
+vagrant validate
 vagrant provision controle
 
 vim Vagrantfile
@@ -123,5 +123,48 @@ vim Vagrantfile
 
 mkdir configs
 vagrant reload --provision controle
+
+vim Vagrantfile
+# Comentar a linha
+controle.vm.synced_folder ".", "/vagrant", disabled: true
+
+config.vm.define "web" do |web|
+	web.vm.box = "geerlingguy/debian9"
+	web.vm.network "private_network", ip: "192.168.84.11"
+	web.vm.hostname = "controle"
+	web.vm.provider "virtualbox" do |vb|
+		vb.name = "web"
+		vb.memory = "512"
+		vb.cpus = 1
+	end
+	web.vm.provision "shell", path: "./scripts/update.sh"
+	web.vm.synced_folder "./configs", "/var/configs", owner: "root", group: "root"
+end
+
+config.vm.define "db" do |db|
+	db.vm.box = "geerlingguy/debian9"
+	db.vm.network "private_network", ip: "192.168.84.12"
+	db.vm.hostname = "controle"
+	db.vm.provider "virtualbox" do |vb|
+		vb.name = "db"
+		vb.memory = "512"
+		vb.cpus = 1
+	end
+	db.vm.provision "shell", path: "./scripts/update.sh"
+	db.vm.synced_folder "./configs", "/var/configs", owner: "root", group: "root"
+end
+
+vagrant validate
+vagrant global-status
+vagrant status
+vagrant up
+vagrant port controle #2222
+vagrant port web #2200
+vagrant port db #2201
+
+
+
+
+
 
 ```

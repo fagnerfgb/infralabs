@@ -77,11 +77,34 @@ Vagrant.configure("2") do |config|
 		vb.name = "controle"
 		vb.memory = "2048"
 		vb.cpus = 2
-		#vb.gui = true
 	end
-  # controle.vm.provision "shell", inline: "apt update && apt install vim -y"
   controle.vm.provision "shell", path: "./scripts/update.sh"
-  controle.vm.synced_folder ".", "/vagrant", disabled: true
+  # controle.vm.synced_folder ".", "/vagrant", disabled: true
   controle.vm.synced_folder "./configs", "/var/configs", owner: "root", group: "root"
   end
+  config.vm.define "web" do |web|
+	web.vm.box = "geerlingguy/debian9"
+	web.vm.network "private_network", ip: "192.168.84.11"
+	web.vm.hostname = "controle"
+	web.vm.provider "virtualbox" do |vb|
+		vb.name = "web"
+		vb.memory = "512"
+		vb.cpus = 1
+	end
+	web.vm.provision "shell", path: "./scripts/update.sh"
+	web.vm.synced_folder "./configs", "/var/configs", owner: "root", group: "root"
+end
+
+config.vm.define "db" do |db|
+	db.vm.box = "geerlingguy/debian9"
+	db.vm.network "private_network", ip: "192.168.84.12"
+	db.vm.hostname = "controle"
+	db.vm.provider "virtualbox" do |vb|
+		vb.name = "db"
+		vb.memory = "512"
+		vb.cpus = 1
+	end
+	db.vm.provision "shell", path: "./scripts/update.sh"
+	db.vm.synced_folder "./configs", "/var/configs", owner: "root", group: "root"
+end
 end
