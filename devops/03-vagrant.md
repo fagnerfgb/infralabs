@@ -268,7 +268,4 @@ end
 .bashrc
 alias vs="vagrant up && vagrant ssh"
 alias vd="vagrant destroy -f"
-
-### Teste
-### Teste2
 ```
