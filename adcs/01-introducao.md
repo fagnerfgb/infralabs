@@ -1,7 +1,7 @@
 #Autor: Fagner Geraldes Braga  
 #Data de criação: 30/03/2023  
-#Data de atualização: 07/04/2023  
-#Versão: 0.02  
+#Data de atualização: 09/04/2023  
+#Versão: 0.03  
 
 ## Criptografia Simétrica  
 	Chave simétrica ou chave de sessão
@@ -61,3 +61,27 @@
 	Membro do AD
 	GPO
 	Auto enrollment
+
+## Tipos de certificados
+### Usuários
+	E-mail
+	Usuário
+	EFS
+	Smart Card
+### Computador
+	Servidor Web - HTTPS
+	IPSEC
+	Exchange
+	System Center
+
+## Emissão
+### Manual 
+	MMC
+	Web
+### Automática
+	GPO
+
+## Templates
+	EFS
+	Web
+	IPSEC

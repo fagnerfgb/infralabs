@@ -56,7 +56,7 @@
 	* 00-config.ps1  
 	* 01-domain.ps1
 ## Configurando ADCS
-### CA ROOT STANDALONE
+### CA Entreprise
 	Server Manager–> Manage –> Add Role and Features
 	Role-based or feature-based installation
 	Select a server from the server pool

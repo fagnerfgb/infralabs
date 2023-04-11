@@ -1,9 +1,9 @@
 #Autor: Fagner Geraldes Braga  
 #Data de criação: 08/04/2023    
-#Data de atualização: 08/04/2023  
-#Versão: 0.01  
+#Data de atualização: 09/04/2023  
+#Versão: 0.02  
 
-# Documentação do Curso de Active Directory Certification Services
+# Documentação do Curso de Active Directory Certificate Services
 
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
