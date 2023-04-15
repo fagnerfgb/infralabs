@@ -1,0 +1,5 @@
+[intranet]
+192.168.84.11 ansible_user=vagrant ansible_ssh_private_key_file="/home/vagrant/.ssh/id_rsa"
+
+[datacenter]
+192.168.84.12 ansible_user=vagrant ansible_ssh_private_key_file="/home/vagrant/.ssh/id_rsa"

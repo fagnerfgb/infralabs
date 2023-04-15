@@ -1,0 +1,15 @@
+---
+- hosts: datacenter
+  become: yes
+  tasks:
+    - name: "Instalação dos Pacotes para Banco de Dados"
+      apt:
+        pkg:
+          - mysql-server
+          - wget
+          - zip
+          - curl
+          - vim
+          - python-mysqldb
+        state: present
+        update_cache: yes

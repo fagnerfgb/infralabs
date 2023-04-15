@@ -55,3 +55,31 @@ kubectl get service
 
 kubectl apply -f .\kube-news\k8s\deployment.yaml
 kubectl get pods
+
+### Grafana
+Usuário: admin
+Senha: 
+
+Executar comando abaixo no gitbash
+kubectl get secret grafana -o jsonpath="{.data.admin-password}" | base64 --decode
+
+Engrenagem, Configuration, Add data source
+Prometheus
+HTTP
+URL: http://prometheus-server
+Save and Test
+
+Dashboards, New dashboard
+Disquete
+Dashboard name: Jornada DevOps de Elite
+Save
+Add Panel
+Add a new panel
+
+Title: Requisições
+Query, Code
+Metrics browser: sum(rate(http_requests_total{path="/"}[20s])) by (app, path)
+
+kubectl delete service
+terraform destroy
+
