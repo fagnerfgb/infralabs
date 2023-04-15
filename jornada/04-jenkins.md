@@ -160,8 +160,3 @@ kubectl get  service
 	Add Webhooks
 	Payload URL: Colar url do Jenkins/github-webhook/
 	Add Webhook
-
-
-
-
-
