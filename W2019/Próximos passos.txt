@@ -1,8 +1,0 @@
-Próximos passos
-
-Criação dos usuários na filial de Osasco
-Criação de Servidor de Arquivos
-Criação de GPO
-WSUS
-Sites and Services 
-RDS
