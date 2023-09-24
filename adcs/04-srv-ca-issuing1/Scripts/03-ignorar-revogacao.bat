@@ -1,1 +1,0 @@
-certutil -setreg ca\CRLFlags +CRLF_REVCHECK_IGNORE_OFFLINE

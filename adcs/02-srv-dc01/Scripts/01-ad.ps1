@@ -1,2 +1,0 @@
-﻿Install-WindowsFeature AD-Domain-Services –IncludeManagementTools
-Install-ADDSForest -CreateDnsDelegation:$false ` -DatabasePath "C:\Windows\NTDS" ` -DomainMode "7" ` -DomainName "grupo2.intra" ` -DomainNetbiosName "GRUPO2" ` -ForestMode "7" ` -InstallDns:$true ` -LogPath "C:\Windows\NTDS" ` -NoRebootOnCompletion:$false ` -SysvolPath "C:\Windows\SYSVOL" ` -Force:$true
