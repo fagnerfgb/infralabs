@@ -1,6 +1,0 @@
----
-- hosts: all
-  tasks:
-    - name: Execução de Comando usando Módulo Shell
-      shell: cat /etc/hosts >> /tmp/arquivo.txt
-  become: yes
