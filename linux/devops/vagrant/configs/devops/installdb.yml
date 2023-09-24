@@ -1,0 +1,52 @@
+---
+- hosts: datacenter
+  become: yes
+  tasks:
+    - name: 'Instalação dos Pacotes para Banco de Dados'
+      apt:
+        pkg:
+          - mysql-server
+          - wget
+          - zip
+          - curl
+          - vim
+          - python-mysqldb
+        state: present
+        update_cache: yes
+    - name: 'Download Arquivo .sql para importação do Banco'
+      unarchive:
+        src: https://github.com/rogerramossilva/devops/raw/master/db.zip
+        dest: /tmp
+        remote_src: yes
+    - name: 'Criação de Banco de Dados Backup'
+      mysql_db:
+        name: backup
+        login_user: root
+        login_password: ''
+        state: present
+    - name: 'Importação do arquivo backup.sql'
+      mysql_db:
+        login_user: root
+        login_password: ''
+        state: import
+        name: backup
+        target: /tmp/backup.sql
+    - name: 'Criação do usuário express para acesso a base de dados'
+      mysql_user:
+        login_user: root
+        login_password: ''
+        host: '%'
+        name: express
+        password: 'AllSafe0!'
+        priv: 'backup.*:ALL'
+        state: present
+    - name: ' Substituindo 127.0.0.1 por 0.0.0.0 no MySQL'
+      replace:
+        path: /etc/mysql/mariadb.conf.d/50-server.cnf
+        regexp: '127\.0\.0\.1'
+        replace: '0.0.0.0'
+    - name: 'Restartar serviço do MySQL'
+      service:
+        name: mysql
+        state: restarted
+        enabled: yes

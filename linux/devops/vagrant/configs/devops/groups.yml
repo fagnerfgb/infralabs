@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: "Criação de Grupos de Usuários"
+      group:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - g_ti
+        - g_diretoria
+        - g_suporte
+    - name: Adicionando Usuário Suporte
+      user:
+        name: suporte
+        comment: Suporte TI
+        uid: 2000
+        shell: /bin/bash
+        group: g_ti
+        groups: g_diretoria, g_suporte
+        password: "$6$WNZ9g583$OWtbuEr8YoG7OrqMHHsT0FATxoGTCnswlswG8wUMR4LDmLyCURibKOanDs6YvPepRfT2ZzAQWU/B4usrFUpZQ."
+        update_password: always
+        append: yes

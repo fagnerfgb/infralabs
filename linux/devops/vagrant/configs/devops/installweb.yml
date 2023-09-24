@@ -1,0 +1,41 @@
+---
+- hosts: intranet
+  become: yes
+  vars_files:
+    - vars/default.yml
+  tasks:
+    - name: "Instalação dos Pacotes Aplicação Express"
+      apt:
+        pkg:
+          - php7.0
+          - php-pear
+          - php7.0-curl
+          - php7.0-gd
+          - php7.0-intl
+          - php7.0-xmlrpc
+          - php7.0-mysql
+          - apache2
+          - python-mysqldb
+          - wget
+          - zip
+          - curl
+          - vim
+        state: present
+        update_cache: yes
+    - name: "Diretório do Webserver"
+      file:
+        path: /srv/www
+        state: directory
+        owner: "{{app_user}}"
+        mode: "0755"
+    - name: "Download e Extração do conteúdo da Aplicação"
+      unarchive:
+        src: https://github.com/rogerramossilva/devops/raw/master/express.zip
+        dest: /srv/www
+        remote_src: yes
+        validate_certs: no
+    - name: "Substituindo IP de Conexão com BD no arquivo backup.php"
+      replace:
+        path: /srv/www/express/backup.php
+        regexp: '192\.168\.1\.20'
+        replace: "192.168.84.11"

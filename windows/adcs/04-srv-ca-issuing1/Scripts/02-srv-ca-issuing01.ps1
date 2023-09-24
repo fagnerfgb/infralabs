@@ -1,0 +1,2 @@
+Install-WindowsFeature ADCS-Cert-Authority -IncludeManagementTools
+Install-ADcsCertificationAuthority -CAType EnterpriseSubordinateCa -CACommonName SRV-CA-ISSUING1 -CADistinguishedNameSuffix "DC=grupo2,DC=intra" -CryptoProviderName "RSA#Microsoft Software Key Storage Provider" -KeyLength 2048 -HashAlgorithmName SHA256 -OutputCertRequestFile "C:\Scripts\srv-ca-issuing1.grupo2.intra.req" -DatabaseDirectory "C:\windows\system32\certLog" -LogDirectory "c:\windows\system32\CertLog" -Force

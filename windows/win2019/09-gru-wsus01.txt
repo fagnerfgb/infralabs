@@ -1,0 +1,280 @@
+#Autor: Fagner Geraldes Braga
+#Data de criação: 15/11/2021
+#Data de atualização: 21/11/2021
+#Versão: 0.02
+******************************************************************************************
+Instalação e Configuração do WSUS
+Criar um disco para receber as atualizações 100GB
+GRU-WSUS01
+IP: 192.168.100.3
+Máscara: 255.255.255.0
+Gateway: 192.168.100.254
+DNS1: 192.168.100.1
+DNS2: 192.168.100.2
+Inicializar disco
+1 Partição Primária com o tamanho total
+Formatar como NFTS
+Unidade W:
+Label: WSUS
+Criar pasta na raiz do WSUS com o nome WSUS
+******************************************************************************************
+Inserir a ISO do Windows 2019 e copiar o caminho D:\sources\sxs
+Apertar as teclas Windows + R e digitar gpedit.msc
+Vá para Configuração do Computador, Modelos Administrativos, Sistema, Especificar configurações 
+para a instalação de componentes opcionais e o reparo de componentes
+Selecione "Habilitado"
+Em caminho de origem alternativo, insira D:\sources\sxs, clique em Aplicar e depois em OK
+No prompt de comando, execute o comando gpupdate /force
+Reinicie o computador
+Ingresse o computador no domínio
+******************************************************************************************
+Em Gerenciador do Servidor, clique em Gerenciar e depois em Adicionar Funções e Recursos
+Clique em Próximo
+Selecione "Instalação baseada em função ou recurso" e clique em Próximo
+Selecione "Selecionar um servidor no pool de servidor" e clique em Próximo
+Marque a função "Windows Server Update Services" e clique em Próximo
+Clique no botão "Adicionar Recursos"
+Clique em Próximo
+Clique em Próximo
+Clique em Próximo
+Em armazenar atualizações no local a seguir, digite W:\WSUS e clique em Próximo
+Clique em Próximo
+Clique em Próximo
+Clique em Instalar
+Finalizada a instalação, clique em "Iniciar tarefas Pós-instalação" 
+Clique em Fechar
+Marque a opção "Usar as seguintes credenciais do usuário"
+Em Nome de usuário digite FGB\Administrador e depois clique em Confirmar
+Clique em Fechar
+******************************************************************************************
+Abra o WSUS
+Clique em Avançar
+Desmarque a opção de Ingressar no Programa de Aperfeiçoamento do Microsoft Update e clique em Avançar
+O primeiro servidor WSUS deve sempre "Sincronizar do Microsoft Update"
+Clique em Avançar
+Clique em Avançar
+Clique em "Iniciar Conexão"
+Esta etapa demora um bom tempo até ser concluída
+Clique em Avançar
+Em "Baixar atualizações somente nestes idiomas" selecione "Ingles" e "Português (Brasil)" e clique em Avançar
+Marque as opções
+Report Viewer 2005
+Report Viewer 2008
+Report Viewer 2010
+Windows 10, version 1903 and later
+Windows Server 2019
+Windows Admin Center
+Microsoft Defender Antivirus
+Microsoft Edge
+Windows - Client, version 21H2 and later, Servicing Drivers
+Windows - Client, version 21H2 and later, Upgrade & Servicing Drivers
+Windows 10 and later Drivers
+Windows 10 and later upgrade & servicing Drivers
+Windows 10 Dynamic Update
+Windows Server 2019 and later, Servicing Drivers
+Windows Server 2019 and later, Upgrade & Servicing Drivers
+Windows Server 2019
+Clique em Avançar
+******************************************************************************************
+Marque as opções
+Atualizações críticas
+Atualizações de definições
+Atualizações de segurança
+Conjuntos de Drivers
+Drivers
+Service packs
+Clique em Avançar
+******************************************************************************************
+Sincronizar manualmente
+Clique em Avançar
+Marque a opção "Começar a sincronização inicial"
+Clique em Avançar
+Clique em Concluir
+******************************************************************************************
+Em Opções clique em "Agenda de Sincronização"
+Marque a opção "Sincronizar automaticamente"
+Em "Primeira sincronização" coloque o horário de "21:00:00" e clique em OK
+******************************************************************************************
+Distribuição das Atualizações
+0- Não distribuir atualizações recém lançadas. Aguardar alguns dias
+1- Criar área de testes separada por sistema operacional e arquitetura
+2- Escolher computadores não críticos ou específicos para testes
+3- Aplicar updates críticos e aguardar uma semana para saber se ocorreu algum problema
+4- Aplicar os demais updates de segurança e aguardar uma semana para saber se ocorreu algum problema
+******************************************************************************************
+WIN10-X64-HOMOLOGACAO
+WIN10-X64-PRODUCAO
+WIN7-X64-HOMOLOGACAO
+WIN7-X64-PRODUCAO
+******************************************************************************************
+Portas usadas pelo WSUS
+Portas 80, 443 Site Padrão
+Portas 8530, 8531 Site Personalizado (A partir do 2008 R2)
+http://windowsupdate.Microsoft.com
+http://*.windowsupdate.microsoft.com
+https://*.windowsupdate.microsoft.com
+http://*.update.microsoft.com
+https://*.update.microsoft.com
+http://*.windowsupdate.com
+http://download.windowsupdate.com
+http://download.microsoft.com
+http://*.download.windowsupdate.com
+http://test.stats.update.microsoft.com
+http://ntservicepack.microsoft.com
+******************************************************************************************
+Validar as Portas
+netstat -ano > portas.txt
+Verificar se as portas 8530 e 8531 aparecem no documento
+Abrir o IIS
+Verificar que o WSUS está num site Personalizado
+******************************************************************************************
+Configurar GPO
+No servidor GRU-DC01, abrir o GPMC.msc
+Na OU DESKTOPS, criar as GPOs 
+GPO-COMP-WSUS-W10-1709
+GPO-COMP-WSUS-W10-1803
+GPO-COMP-WSUS-W10-1809
+GPO-COMP-WSUS-W10-1903
+GPO-COMP-WSUS-W10-1909
+GPO-COMP-WSUS-W10-2004
+GPO-COMP-WSUS-W10-20H2
+GPO-COMP-WSUS-W10-21H1
+GPO-COMP-WSUS-W10-21H2
+GPO-COMP-WSUS-W7
+Clique na GPO criada e depois clique em Detalhes. Em Status da GPO selecione Configurações de Usuário Desabilitadas
+Clique com o botão direito na GPO e clique em Editar
+Vá em Configurações do Computador, Políticas, Modelos Administrativos, Componentes do Windows, Windows Update
+******************************************************************************************
+1-
+Habilitar: Especificar o local do serviço de atualização na intranet da Microsoft
+Configurar o serviço de atualização da intranet para detectar atualizações: http://GRU-WSUS01:8530
+Configure as estatísticas do servidor intranet: http://GRU-WSUS01:8530
+******************************************************************************************
+2-
+Habilitar: Frequência de detecção de Atualizações Automáticas
+Intervalo: 22 horas
+******************************************************************************************
+3-
+Habilitar: Configurar Atualizações Automáticas
+4- Baixar automaticamente e agendar a instalação
+4- Toda quarta-feira
+15:00
+******************************************************************************************
+4-
+Não exibir a opção "Instalar Atualizações e Desligar" na caixa de diálogo Desligar o Windows
+******************************************************************************************
+Instalar .NET Framework 2.0
+******************************************************************************************
+Abrir o Server Manager
+Adicionar funções e recursos
+Próximo
+Próximo
+Próximo
+Próximo
+Recursos do .NET Framework 3.5
+	.NET Framework 3.5 (inclui .NET 2.0 e 3.0)
+Próximo
+Instalar
+******************************************************************************************
+Instalar 
+Microsoft System CLR Types para SQL 2012
+Microsoft Report Viewer 2012 Runtime
+******************************************************************************************
+Aprovação de Updates Críticos
+******************************************************************************************
+Abrir o WSUS
+Clicar em Atualizações Críticas
+Clicar em Pesquisar e Digitar Windows 10
+Selecionar todas as atualizações e clicar em Aprovar
+Selecionar o Grupo WIN10-HOM
+Aprovar para Instalação e depois clicar em OK
+Clique em Fechar e depois em Fechar novamente
+Mover as estações de trabalho que serão usadas para homologação para o Grupo WIN10-HOM
+******************************************************************************************
+Importar Atualizações do Catálogo da Microsoft
+Abrir o WSUS
+Clique no menu com o nome do seu servidor WSUS
+No canto direito da tela, clique em Importar Atualizações paa abrir o Catálogo Microsoft Update
+Clique no botão Instalar
+Clique em Instalar
+Pesquise pelo KB desejado
+Depois de encontrá-lo, clique em Adicionar
+Clique em Ver cesto
+Marque a opção "Importar diretamente para Windows Server Update Services e clique em Importar
+A Atualização estará disponível para você no WSUS
+******************************************************************************************
+Gerenciar Computadores no WSUS com GPO
+Abrir o WSUS
+Clicar em Opções
+Computadores
+Usar Política de Grupo ou configurações do Registro em computadores
+******************************************************************************************
+Acesse o gpmc.msc no servidor GRU-DC01
+Edite a GPO GPO-COMP-WSUS-DESKTOPS
+Vá em Configurações do Computador, Políticas, Modelos Administrativos, Componentes do Windows, Windows Update
+Habilitar: Habilitar destino do lado cliente
+Nome do Grupo: WIN10-PROD
+******************************************************************************************
+Gerenciamento de Computadores no WSUS com GPO e Filtro WMI
+Acesse o gpmc.msc no servidor GRU-DC01
+Edite a GPO GPO-COMP-WSUS-DESKTOPS
+Vá em Configurações do Computador, Políticas, Modelos Administrativos, Componentes do Windows, Windows Update
+Habilitar: Habilitar destino do lado cliente
+Nome do Grupo: WIN10-PROD
+
+W10-21H2
+select * from Win32_OperatingSystem WHERE Version like "10.0.19044" AND ProductType="1"
+W10-21H1
+select * from Win32_OperatingSystem WHERE Version like "10.0.19043" AND ProductType="1"
+W10-20H2
+select * from Win32_OperatingSystem WHERE Version like "10.0.19042" AND ProductType="1"
+W10-2004
+select * from Win32_OperatingSystem WHERE Version like "10.0.19041" AND ProductType="1"
+W10-1909
+select * from Win32_OperatingSystem WHERE Version like "10.0.18363" AND ProductType="1"
+W10-1903
+select * from Win32_OperatingSystem WHERE Version like "10.0.18362" AND ProductType="1"
+W10-1809
+select * from Win32_OperatingSystem WHERE Version like "10.0.17763" AND ProductType="1"
+W10-1803
+select * from Win32_OperatingSystem WHERE Version like "10.0.17134" AND ProductType="1"
+W10-1709
+select * from Win32_OperatingSystem WHERE Version like "10.0.16299" AND ProductType="1"
+Windows 7 
+select * from Win32_OperatingSystem WHERE Version like "6.1%" AND ProductType="1"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
