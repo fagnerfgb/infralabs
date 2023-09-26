@@ -1,7 +1,7 @@
 #Autor: Fagner Geraldes Braga  
 #Data de criação: 11/03/2023  
-#Data de atualização: 11/03/2023  
-#Versão: 0.01  
+#Data de atualização: 26/09/2023 
+#Versão: 0.02  
 
 # Windows Server 2002 Standard  
 
@@ -100,3 +100,116 @@
 	* Backup Exec Settings  
 	* Network and Security  
 	* Enable TCP dynamic port range: 60000 - 61000  
+
+## Criando Jobs de Backup
+
+```
+Abra o Backup Exec, clique em Backup and Restore e abra o servidor dc01.grupo2.intra
+Clique em Backup, Backup to Disk
+Name: BKP-DC01
+Em Backup (lado direito da tela), clique em Edit
+Remova o backup Incremental
+Agende o Backup Full para todas as sextas-feiras às 23h
+
+Agora clique em Add a Backup Job e escolha Differential
+Em Job template name, digite Diferencial
+Agende o Backup Diferencial para todas as segundas, terças, quartas e quintas às 23h
+
+Clique em Storage (lado esquerdo da tela) 
+No Backup Full
+Em Storage selecione: Backup em Disco
+Em Keep for: 4 weeks
+No Backup Diferencial
+Em Storage selecione: Backup em Disco
+Em Keep for: 4 weeks
+
+Clique em Verify
+No Backup Full
+Verify the data: After job finishes, as a separate job
+No Backup Diferencial
+Verify the data: After job finishes, as a separate job
+Clique em OK
+
+Agora no canto esquerdo da tela, clique em Edit
+Selecionar o Disco F: e o System State
+Clique em OK
+Clique em OK
+Do not display this message again
+Save the job without encryption
+
+Clique com o botão direito em BKP-DC01-Full, clique em Run Now e depois em yes
+```
+
+## Restaurando Backup
+```
+Criar o diretório Restore em F:\
+Abra o Backup Exec, clique em Backup and Restore e selecione Restore
+File, folders, or volumes, Next
+File and folder backups to a point-in-time, Next
+Selecione o intervalo de data desejado, depois escolha o servidor, o volume, o tipo de backup a ser restaurado e os diretórios/arquivos desejados
+Na simulação, escolhi o servidor dc01.grupo2.intra, unidade F:, Backup Full de 26/09 e Escolhi a pasta Backup
+Next
+To a different location, Browse
+bex.grupo2.intra, F:, Restore
+OK
+Next
+Recreate the directory structure from the backup when data is restored; otherwise, all data is restored without any directory structure
+Overwrite the file on disk only if it is older
+Restore files with their security information and file system permissions
+Next
+Next
+Next
+Name: restore-pasta-backup-dc01
+Run now
+Next
+Finish
+```
+## Backup do Servidor Linux
+```
+Abra o Backup Exec, clique em Backup and Restore e abra o servidor dc01.grupo2.intra
+Clique em Backup, Backup to Disk
+Name: 192.168.56.10
+Em Backup (lado direito da tela), clique em Edit
+Remova o backup Incremental
+Agende o Backup Full para todas as sextas-feiras às 23h
+
+Clique em Storage (lado esquerdo da tela) 
+No Backup Full
+Em Storage selecione: Backup em Disco
+Em Keep for: 4 weeks
+
+
+Clique em Verify
+No Backup Full
+Verify the data: After job finishes, as a separate job
+
+
+Agora no canto esquerdo da tela, clique em Edit
+Clique em Root e escolha a pasta home
+Clique em OK
+Clique em OK
+
+Clique com o botão direito em BKP-DC01-Full, clique em Run Now e depois em yes 
+```
+## Restaurando Backup Linux
+```
+Abra o Backup Exec, clique em Backup and Restore e selecione Restore
+File, folders, or volumes, Next
+File and folder backups to a point-in-time, Next
+Selecione o intervalo de data desejado, depois escolha o servidor, o volume, o tipo de backup a ser restaurado e os diretórios/arquivos desejados
+Next
+To a different location, Browse
+bex.grupo2.intra, F:, Restore
+OK
+Next
+Recreate the directory structure from the backup when data is restored; otherwise, all data is restored without any directory structure
+Lock the remote files if the mount points have the necessary permissions
+Overwrite the file on disk only if it is older
+Next
+Next
+Next
+Name: restore-pasta-home-192.168.56.10
+Run now
+Next
+Finish
+```

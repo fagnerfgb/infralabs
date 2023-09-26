@@ -1,7 +1,7 @@
 #Autor: Fagner Geraldes Braga  
 #Data de criação: 11/03/2023  
-#Data de atualização: 11/03/2023  
-#Versão: 0.01  
+#Data de atualização: 26/09/2023  
+#Versão: 0.02  
 
 # Ubuntu Server 22.04.02 LTS  
 
@@ -182,6 +182,29 @@
 ## Liberações no firewall para funcionamento correto do backup exec
 	sudo ufw allow 10000/tcp 
 	sudo ufw allow 60000:61000/tcp
+## Instalação do Agente
+```
+Copiar o arquivo RALUS_RMALS-1193.1338.tar.gz do DVD do Backup Exec para o servidor ubuntu usando o webmin
+Clique em Tools, File Manager e selecione o diretório /tmp
+Clique em File, Upload to current directory
+Selecione o arquivo RALUS_RMALS-1193.1338.tar.gz, marque a opção Extract Compressed e clique em Upload
+Abra o terminal e digite cd /tmp/RALUS_RMALS-1193.1338
+Agora digite sudo ./installralus
+Enter
+Enter
+Enter
+Enter
+Enter
+y
+n
+Enter
+y
+Enter
+## Adicionar usuário senac ao grupo beoper usando o webmin
+System, Users and Groups, Local Groups
+Clique em beoper, adicione o usuário senac e clique em Save
+```
+# Não utilizei o roteiro abaixo
 ## Samba
 	sudo apt-get update  
 	sudo apt-get install krb5-user samba sssd sssd-tools libnss-sss libpam-sss ntp ntpdate realmd adcli -y  
