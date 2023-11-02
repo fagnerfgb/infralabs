@@ -1,7 +1,7 @@
 #Autor: Fagner Geraldes Braga  
 #Data de criação: 01/04/2023  
-#Data de atualização: 05/04/2023  
-#Versão: 0.04  
+#Data de atualização: 02/11/2023  
+#Versão: 0.05  
 
 # Windows Server 2002 Standard  
 
@@ -61,7 +61,7 @@
 	* cria_grupos_ad.bat  
 	* cria_usuarios.bat  
 ## Abrir o Powershell ISE como Administrador e executar os scripts na seguinte ordem:  
-	* adiciona-usuario-a-grupo.ps1 (Este script apresenta erro ao executar, mas os usuários são atribuídos aos grupos correspodentes)  
+	* adiciona-usuario-a-grupo.ps1 (Este script apresenta erro ao executar, mas os usuários são atribuídos aos grupos correspondentes)  
 
 ### Instalando certificado da CA Root
 No File Explorer, vá em C:\Script e clique com o direito srv-ca-root01 e clique em Install Certificate
@@ -84,7 +84,7 @@ Finish
 	Clique com o direito em Trusted Root Certification Authorities, Import
 	Next
 	Browse...
-	C:\Scripts\srv-ca-root01.cer
+	C:\Temp\srv-ca-root01.cer
 	Open
 	Next
 	Next
@@ -108,7 +108,7 @@ Finish
 	Server Manager, Tools, Group Policy Management
 	Forest: grupo2.intra, Domains, grupo2.intra,Group Policy Objects, 
 	Clicar com o direito em GPO-Certificados, Edit...
-	User Configuration/Policies/Security Settings/Public Key Policies
+	User Configuration/Policies/Windows Settings/Security Settings/Public Key Policies
 	Duplo clique em Certificate  Services Client - Auto-Enrollment
 	Enabled
 	Marcar Renew expired certificates, update pending certificates, and remove revoked certificates
@@ -117,4 +117,3 @@ Finish
 
 	Clique com o direito na OU USERS e depois clique em Link an Existing GPO...
 	Selecione a GPO-Certificados e clique em OK
-

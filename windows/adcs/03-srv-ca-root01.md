@@ -59,7 +59,7 @@
 ## Configurando ADCS 
 ### Se já tiver executado o script 01-ca-root.ps1 não precisa executar os comandos do bloco CA ROOT STANDALONE
 ### CA ROOT STANDALONE
-	Server Manager–> Manage –> Add Role and Features
+	Server Manager –> Manage –> Add Role and Features
 	Role-based or feature-based installation
 	Select a server from the server pool
 	srv-ca-root01
@@ -91,7 +91,7 @@
 	Next
 	Cryptographic Message Syntax Standard - PKCS #7 Certificates (.P7B)
 	Include all certificates in the certification path if possible
-	Browse:  C:\Scripts\srv-ca-issuing1-signed.p7b Save
+	Browse:  C:\Temp\srv-ca-issuing1-signed.p7b Save
 	Next
 	Finish
 	OK

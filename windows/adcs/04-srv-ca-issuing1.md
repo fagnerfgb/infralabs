@@ -1,7 +1,7 @@
 #Autor: Fagner Geraldes Braga  
 #Data de criação: 01/04/2023  
-#Data de atualização: 04/04/2023  
-#Versão: 0.03  
+#Data de atualização: 02/11/2023  
+#Versão: 0.04  
 
 # Windows Server 2002 Standard  
 
@@ -55,7 +55,9 @@
 ## Abrir o Powershell ISE como Administrador e executar os scripts na seguinte ordem:  
 	* 00-config.ps1  
 	* 01-domain.ps1
+	* 02-srv-ca-issuing01.ps1
 ## Configurando ADCS
+### Se já tiver executado o script 02-srv-ca-issuing01.ps1 não precisa executar os comandos do bloco CA Entreprise
 ### CA Entreprise
 	Server Manager–> Manage –> Add Role and Features
 	Role-based or feature-based installation
@@ -143,7 +145,7 @@
 	Marque a opção Password, insira e confirme a senha a ser utilizada: 123@senac
 	Next
 	Browse...
-	Insira o local e o nome do arquivo: C:\Scripts\www.fagnerbraga.com.br.pfx e clique em Save
+	Insira o local e o nome do arquivo: \\srv-ca-issuing1\Temp\www.fagnerbraga.com.br.pfx e clique em Save
 	Next
 	Finish
 	OK
@@ -199,7 +201,7 @@
 	Cryptographic service provider: Microsoft RSA SChannel Cryptographic Provider
 	Bit length: 1024
 	Next
-	Specify a file name for the certificate request: C:\Scripts\request-ca.grupo2.intra.txt
+	Specify a file name for the certificate request: C:\Temp\request-ca.grupo2.intra.txt
 	Finish
 
 	Abrir o arquivo request-ca.grupo2.intra.txt e copiar conteúdo dele
@@ -279,7 +281,7 @@
 	Cryptographic Message Syntax Standard - PKCS #7 Certificates (.P7B)
 	Marque a opção Include all certificates in the certification path if possible
 	Next
-	File name: C:\Scripts\srv-ca-root01.p7b
+	File name: C:\Temp\srv-ca-root01.p7b
 	Next
 	Finish
 	OK
@@ -297,7 +299,7 @@
 	Details, Copy to File...
 	Next
 	DER encoded binary X.509 (.CER)
-	File name: C:\Scripts\srv-ca-root01.cer
+	File name: C:\temp\srv-ca-root01.cer
 	Next
 	Finish
 	OK
@@ -338,8 +340,124 @@
 	Feche o Certificate Templates Console
 	Para habilitar o Auto Enrollment, criar GPO no srv-dc01
 
-### Lista de Revogação de Certificado
+### Backup da CA usando interface Gráfica
+	Server Manager, Tools, Certification Authority
+	Clique com o direito em SRV-CA-ISSUING1, All Tasks, Backup CA
+	Clique em Next
+	Marque as opções
+	Private key and CA certificate
+	Certificate database and certificate database log
+	Clique em Browse
+	Selecione o local onde será salvo o backup e clique em OK
+	Clique em Next
+	Password:
+	Confirm password:
+	Clique em Next
+	Clique em Finish
 
+### Backup da CA usando a linha de comando
+	Abrir o Prompt de Comando como Administrator e executar o comando abaixo
+	certutil -backup C:\bkp-ca\02
+	Enter new password:
+	Confirm new password:
 
+### Restore do Backup da CA usando interface Gráfica
+	Server Manager, Tools, Certification Authority
+	Clique com o direito em SRV-CA-ISSUING1, All Tasks, Restore CA
+	Clique em OK
+	Clique em Next
+	Marque as opções
+	Private key and CA certificate
+	Certificate database and certificate database log
+	Clique em Browse
+	Selecione o local onde está salvo o backup e clique em OK
+	Clique em Next
+	Password:
+	Clique em Next
+	Clique em Finish
+	Clique em Yes
 
+### Configurando o Responder Online OCSP
 
+#### Criando o template
+	Server Manager, Tools, Certification Authority
+	Clique em SRV-CA-ISSUING1
+	Clique com o direito em Certificate Templates, Manage
+	Clique com o direito em OCSP Response Signing, Duplicate Template
+	Na aba General 
+	Dê um nome para o template: Certificado-OCSP
+	Na aba Security
+	Clique em Add
+	Clique em Object Type, marque a opção Computers e clique em OK
+	Procure por SRV-CA-ISSUING1 e clique em OK
+	Em SRV-CA-ISSUING1 marque a opção de Allow em Enroll e clique em OK
+	Feche o Certificate Templates Console
+#### Emitindo o template
+	Clique com o direito em Certificate Templates, New, Certificate Template to Issue
+	Selecione o template gerado no passo anterior: Certificado-OCSP e clique em OK
+#### Emitir certificado de online Responder
+Pressione as teclas Winkey + R e digite MMC
+	File Add/Remove Snap-in...
+	Certificates Add>
+	Computer account, Next
+	Local computer, Finish, OK
+	Clique em Certificates, Personal
+	Clique com o direito em Certificates, All Tasks, Request New Certificate
+	Next
+	Next
+	Marque a opção Certificado-OCSP e clique em Enroll
+	Clique em Finish
+#### Instalar Role de Online Responder
+	Server Manager–> Manage –> Add Role and Features
+	Role-based or feature-based installation
+	Select a server from the server pool
+	srv-ca-issuing1
+	Active Directory Certificate Services
+	Marque a opção Online Responder
+	Add Features
+	Next
+	Next
+	Install
+	Configure Active Directory Certificate Services on the destination server
+	Credentials: GRUPO2\Thanos
+	Online Responder
+	Next
+	Configure
+	Close
+	Close
+
+	Server Manager, Tools, Online Responder Management
+	Clique com o direito em Revocation Configuration e depois clique em Add Revocation Configuration
+	Next
+	Name: SRV-CA-ISSUING1
+	Next
+	Select a certificate for an Existing enterprise CA
+	Next
+	Browse CA certificates published in Active Directory, clique em Browse
+	Selecione a CA e clique em OK
+	Next
+	Selecione a opção Automatically select a signing certificate
+	Desmarque a opção Auto-Enroll for an OCSP signing certificate
+	Next
+	Finish
+#### Cadastrar Responder no AIA
+	Server Manager, Tools, Certification Authority
+	Clique com o direito em SRV-CA-ISSUING1
+	Clique na aba Extensions
+	Em Select extension, selecione Authority Information Access (AIA)
+	Clique em Add
+	Em Location, https://srv-ca-issuing1.grupo2.intra/ocsp
+	Clique em OK
+	Marque a opção Include in the online certificate status protocol (OCSP) extension
+	Clique em OK
+	Clique em Yes
+### Auditando uma CA
+	Server Manager, Tools, Certification Authority
+	Clique com o direito em SRV-CA-ISSUING1
+	Clique na aba Auditing
+	Marque todas as opções e clique em OK
+
+	Server Manager, Tools, Local Security Policy
+	Local Policies/ Audit Policy
+	Audit logon events - Success
+	Audit object events - Success
