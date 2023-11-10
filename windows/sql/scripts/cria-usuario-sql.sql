@@ -1,0 +1,1 @@
+CREATE LOGIN [fagner.braga] WITH PASSWORD = '123@senac';
