@@ -227,9 +227,11 @@ docker run -d --network minha-bridge --name alurabooks -p 3000:3000 aluradocker/
 ```bash
 sudo apt-get update
 sudo apt-get install docker-compose-plugin
+sudo apt  install docker-compose -y
 ```
 ```docker
 docker compose version
 docker compose
+cd ~/infralabs/linux/docker/ymls
 docker-compose up
 ```

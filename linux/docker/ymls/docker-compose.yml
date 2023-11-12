@@ -16,4 +16,4 @@ services:
 
 networks:
   compose-bridge:
-    drive: bridge
+    driver: bridge
