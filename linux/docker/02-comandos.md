@@ -234,4 +234,7 @@ docker compose version
 docker compose
 cd ~/infralabs/linux/docker/ymls
 docker-compose up
+docker-compose up -d
+docker-compose ps
+docker-compose down
 ```
