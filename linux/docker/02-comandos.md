@@ -45,21 +45,27 @@ docker history f589ccde7957
 ```
 ```
 docker build -t fagnerbraga/app-exemplo:1.0 .
-docker run -d -p 8080:6000 fagnerbraga/app-exemplo:1.0 .
+docker run -d -p 8080:3000 fagnerbraga/app-exemplo:1.0 .
 ```
 ```
 docker stop $(docker ps -q)
-docker build -t fagnerbraga/app-node:1.1 .
-docker run -d fagnerbraga/app-node:1.1 .
-docker build -t fagnerbraga/app-node:1.2 .
-docker run -d fagnerbraga/app-node:1.2 .
+```
+```
+docker build -t fagnerbraga/app-exemplo:1.1 .
+docker run -d fagnerbraga/app-exemplo:1.1 .
+```
+```
+docker build -t fagnerbraga/app-exemplo:1.2 .
+docker run -d fagnerbraga/app-exemplo:1.2 .
+```
+```
 docker stop $(docker ps -q) -t 0
 docker rmi $(docker images -a -q) --force
 
 ```
-docker build -t fagnerbraga/monitor-cedula:1.0 .
-docker run -d -p 8080:6000 fagnerbraga/app-exemplo:1.0 .
 
 
 
-scp -P 22 "D:\CRFSP\OneDrive - crfsp.org.br\Git\infralabs\linux\docker\app-exemplo\Dockerfile" senac@192.168.0.17:~/app-exemplo
+
+
+ 
