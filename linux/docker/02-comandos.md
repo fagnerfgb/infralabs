@@ -117,20 +117,117 @@ docker push fagnerfgb/app-exemplo:1.1
 docker tag fagnerbraga/app-exemplo:1.2 fagnerfgb/app-exemplo:1.2
 docker push fagnerfgb/app-exemplo:1.2
 ```
+```docker
+docker container rm $(docker ps -aq) --force
+# remove todos os containers
 
+docker rmi $(docker image ls -aq) --force
+# remove todas as imagens
+```
+```docker
+docker run -it ubuntu bash
 
+docker ps -s
+# informa o tamanho do container
+```
+## Bind Mounts
+```bash
+mkdir ~/volume-docker
+cd ~/volume-docker
+```
+```docker
+docker run -itv  ~/volume-docker:/app ubuntu bash
+# -v definir bind mount pasta-host:pasta-container
+
+docker run -it --mount type=bind,source=/home/senac/volume-docker,target=/app ubuntu bash
+# recomendado usar --mount ao invés de -v
+```
+## Volumes
+```docker
+docker volume ls
+# lista os volumes disponíveis
+
+docker volume create meu-volume
+# cria volume
+
+docker run -itv  meu-volume:/app ubuntu bash
+
+sudo su -
+cd /var/lib/docker/volumes/meu-volume/_data
+exit
+
+docker run -it --mount source=meu-volume,target=/app ubuntu bash
+```
+## TMPFS
+```docker
+# Só funciona no Linux
+docker run -it --tmpfs=/app ubuntu bash
+
+docker run -it --mount type=tmpfs,destination=/app ubuntu bash
+```
+## Rede Bridge
+```docker
+# Executar os comandos abaixo em dois terminais diferentes para poder realizar os testes de ping
+docker run -it ubuntu bash
+apt update
+apt install iputils-ping -y
+``` 
+```docker
+docker ps
+docker inspect 02d7022bc509
+docker network ls
+```
+```docker
+docker network create --driver bridge minha-bridge
+# cria uma rede
+
+docker run -it --name ubuntu1 --network minha-bridge ubuntu bash
+# --name cria um nome para o container
+# --network adiciona a rede criada no passo anterior
+
+apt update
+apt install iputils-ping -y
+```
+```docker
+# Executar os comandos abaixo em outro terminal para poder realizar os testes de ping
+docker run --name pong --network minha-bridge -d ubuntu  sleep 1d
+```
+```docker
+# Retornar ao terminal anterior
+ping pong
+```
+## Rede None
+```docker
+docker run --name pong --network none -d ubuntu  sleep 1d
+```
+## Rede Host
+```docker
+docker run -d  --network host fagnerfgb/app-exemplo:1.0
+docker inspect 195c89f9e3666068ff60e945e340b059a7685068abba88efbdb6ffb73e844af0
+
+lynx localhost:3000
+# abre navegador em modo text, já que estou usando ubuntu-server
+```
+
+```docker
+docker pull mongo:4.4.6
+docker pull aluradocker/alura-books:1.0
+# baixa as imagens do docker hub
+
+docker run -d --network minha-bridge --name meu-mongo mongo:4.4.6
+
+docker run -d --network minha-bridge --name alurabooks -p 3000:3000 aluradocker/alura-books:1.0
+
+# No navegador abrir a url ipdohost:3000
+# Depois ipdohost:3000/seed
+# Depois ipdohost:3000
+# Será exibido os livros disponíveis
+```
+## Docker Compose
+```docker
 
 
 
 
 
 ```
-docker stop $(docker ps -q) -t 0
-docker rmi $(docker images -a -q) --force
-```
-
-
-
-
-
- 
