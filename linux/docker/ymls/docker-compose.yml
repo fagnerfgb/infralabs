@@ -7,7 +7,7 @@ services:
       - compose-bridge
 
   alurabooks:
-    image: aluradocker/alurabooks:1.0
+    image: aluradocker/alura-books:1.0
     container_name: alurabooks
     networks:
       - compose-bridge
