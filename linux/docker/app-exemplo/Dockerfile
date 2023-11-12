@@ -1,5 +1,5 @@
 FROM node:21
-WORKDIR /home/senac/app-exemplo/
+WORKDIR /home/senac/app-exemplo
 # ARG PORT_BUILD=6000
 # ENV PORT=$PORT_BUILD
 # EXPOSE $PORT_BUILD
