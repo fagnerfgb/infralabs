@@ -27,3 +27,14 @@ sudo docker run hello-world
 ```
 sudo usermod -aG docker $USER 
 ```
+## Conectando ao repositório do GitHub
+```
+git config --global user.name "fagnerfgb"
+git config --global user.email "fagner.fgb@gmail.com"
+cd ~/.ssh
+ssh-keygen -o -t rsa -C "fagner.fgb@gmail.com"
+cat id_rsa.pub
+```
+```
+git clone git@github.com:fagnerfgb/infralabs.git
+```
