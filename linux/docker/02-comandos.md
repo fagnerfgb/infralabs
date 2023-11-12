@@ -224,10 +224,12 @@ docker run -d --network minha-bridge --name alurabooks -p 3000:3000 aluradocker/
 # Será exibido os livros disponíveis
 ```
 ## Docker Compose
+```bash
+sudo apt-get update
+sudo apt-get install docker-compose-plugin
+```
 ```docker
-
-
-
-
-
+docker compose version
+docker compose
+docker-compose up
 ```
