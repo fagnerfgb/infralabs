@@ -1,0 +1,12 @@
+Obter todos os usuários onde a propriedade externo esteja habilitada
+Gerar relatório contendo (nome completo do usuário, login, departamento)
+
+Obter todos os usuários que não logam há mais de 90 dias
+Gerar relatório contendo (nome completo do usuário, login, departamento,data do último logon, quantidade de dias)
+
+Obter todos os computadores que não logam há mais de 90 dias
+Gerar relatório contendo (nome do computador, data do último logon, quantidade de dias)
+
+Criar usuário no AD de maneira automatizada
+
+Criar usuário no banco de dados de maneira automatizada
