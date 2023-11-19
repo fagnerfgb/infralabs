@@ -1,9 +1,8 @@
-﻿$servico = Get-Service -Name "Audiosrv" -ComputerName "DTI11026X"
-$servico.Status
-if ($servico.Status -eq "Running"){
+﻿$servico = Get-Service -name "AdobeARMservice" -ComputerName "Fagner"
+if ($servico.Status -eq "Running") {
     $servico.Stop()
     $servico.Start()
-} 
-else {
-    echo "O servico nao esta em execucao"
+    Write-Output "Servico reiniciado com sucesso"
+} else {
+    Write-Output "O servico nao estava em execucao"
 }

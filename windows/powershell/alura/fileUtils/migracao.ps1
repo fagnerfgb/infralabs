@@ -12,15 +12,14 @@ $params = $nameExpr, $lengthExpr
 
 # Código
 $resultado = 
-	gci -Recurse -File | 
-		? Name -like "*_migrando_*" | 
-		Select $params
+	Get-ChildItem -Recurse -File | 
+		Where-Object Name -like "*_migrando_*" | 
+		Select-Object $params
 if ($tipoDeExportacao -eq "HTML"){
 $estilos = Get-Content styles.css
 $styleTag = "<style> $estilos </style>"
 $tituloPagina = "Relatorio de Scripts em Migracao"
 $tituloBody = "<h1> $tituloPagina </h1>"
-
 $resultado | 
 	ConvertTo-Html -Head $styleTag -Title $tituloPagina -Body $tituloBody| 
 	Out-File relatorio.html
@@ -28,9 +27,9 @@ $resultado |
 	$resultado | 
 	ConvertTo-JSON |
 	Out-File relatorio.json
-
 } elseif ($tipoDeExportacao -eq "CSV"){
 	$resultado | 
 	ConvertTo-CSV -notypeinformation |
 	Out-File relatorio.csv
 }
+Write-Output "Relatorio $tipoDeExportacao gerado com sucesso"
