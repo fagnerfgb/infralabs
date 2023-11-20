@@ -77,3 +77,20 @@ $env:HOMEPATH
 Stop-Transcript
 
 Get-Module -Name ActiveDirectory -ListAvailable
+
+Get-Command -Noun *User* -module ActiveDirectory
+
+New-ADUser "Jane Doe" -Department IT
+
+Get-ADUser -Filter *
+
+Get-ADUser -Identity "Jane Doe" -Properties *
+
+Get-Help Get-ADUser -Examples
+
+Get-ADUser -Filter 'Name -like "*Robson*"'
+
+Get-ADUser -filter * -SearchBase "OU=USERS,OU=GRUPO2,DC=GRUPO2,DC=INTRA" | Format-Table Name,DistinguishedName
+
+Get-Help Get-ADUser -ShowWindow
+
