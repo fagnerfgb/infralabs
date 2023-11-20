@@ -238,3 +238,47 @@ Get-ADUser -Filter * | Measure-Object
 Get-ADObject -Filter * | Measure-Object
 # lista quantidade de objetos existentes
 
+Get-Process | Sort-Object -Property ProcessName | Select-Object -First 10
+# lista os objetos organizando pelo ProcessName e depois exibe os primeiros 10 processos
+
+Get-Process | Sort-Object -Property ProcessName | Select-Object -Last 10
+# lista os objetos organizando pelo ProcessName e depois exibe os últimos 10 processos
+
+Get-Process | Sort-Object -Property ProcessName | Select-Object -First 10 -Skip 1
+# lista os objetos organizando pelo ProcessName e depois exibe os primeiros 10 processos e pula o primeiro
+
+Get-ADUser -Filter * | Sort-Object -Property Name | Format-Table Name
+
+Get-ADUser -Filter * -Properties Title | Sort-Object -Property Title, Name | Format-Table Title, Name
+
+Get-Process | Sort-Object -Property CPU -Descending |Select-Object -Property Name, CPU -First 10 | Format-Table 
+
+$varDns = Get-Process dns
+
+Write-Output $varDns
+
+$varDns.Name
+$varDNS.VM
+$varDNS.CPU
+
+$varUser = Get-ADUser -Filter * -Properties *| Where-Object {$PSItem.Name -eq "Fagner Braga"}
+$varUser.City
+$varUser.Title
+$varUser.Country
+
+Get-Process | Select-Object Name, Id, @{n="Memória Virtual";e={$PSItem.VM}} -First 10
+
+Get-Date | Get-Member
+
+$data = Get-Date
+$data.day
+$data.DayOfWeek
+$data.DayOfYear
+$data.Ticks
+$data.TimeOfDay
+
+
+Get-HotFix | Get-Member
+
+$kbs = Get-HotFix
+$kbs.hotfixID
