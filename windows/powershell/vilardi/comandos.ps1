@@ -282,3 +282,256 @@ Get-HotFix | Get-Member
 
 $kbs = Get-HotFix
 $kbs.hotfixID
+
+Get-Service | Where-Object Status -eq Running
+
+Get-EventLog -LogName Application -Newest 100 | Where-Object {$PSItem.EntryType -eq "Error" -and $PSItem.EventID -eq 8193}
+
+Get-Process | Where-Object {$PSItem.CPU -gt 10}
+
+Get-Process | Where-Object {$PSItem.Responding -eq $true -or $PSItem.Responding -eq "Starting"}
+
+Get-Process | Where-Object {-not $PSItem.Responding}
+
+(Get-Service | Where-Object {$PSItem.name -eq "WinRM"} | Format-Table Name).length
+
+Get-Service | Where-Object {$PSItem.Name.Length -lt 5} | Format-Table Name
+
+Get-Date | Get-Member
+
+Get-Help Get-Service -ShowWindow
+
+Get-ADComputer -Filter * | Select-Object @{n="ComputerName";e={$PSItem.name}} | Get-Process
+
+Get-PSProvider
+
+Get-PSDrive
+
+Get-Command -Noun *item* -Module Microsoft.PowerShell.Management
+
+Set-Location env:
+
+Get-ChildItem
+
+$env:OS
+
+$env:COMPUTERNAME
+
+$env:LOCALAPPDATA
+
+Get-PSProvider
+
+Set-Location HKLM:
+
+Get-ChildItem software\Microsoft\windows\currentversion
+
+Get-ItemProperty software\Microsoft\windows\currentversion\Run -Name SecurityHealth
+
+$regRun = Get-ItemProperty software\Microsoft\windows\currentversion\Run -Name SecurityHealth
+
+$regRun
+
+Get-PSProvider
+
+Set-Location Alias:
+
+Get-ChildItem
+
+Get-PSProvider
+
+Import-Module ActiveDirectory
+
+Set-Location AD:
+
+Get-ChildItem
+
+Get-Command -Noun *item* -Module Microsoft.PowerShell.Management
+
+Get-Help New-Item -ShowWindow
+
+New-Item -Path \\grupo2.intra\SYSVOL\grupo2.intra\scripts -Name Teste -ItemType Directory
+
+Get-PSDrive
+
+New-PSDrive -name Teste -Root \\grupo2.intra\SYSVOL\grupo2.intra\scripts\Teste -PSProvider FileSystem
+
+Get-PSDrive
+
+Set-Location Teste:
+
+New-Item script.txt
+
+Get-ChildItem
+
+Get-ChildItem -Path HKCU:\Software
+
+New-Item -Path HKCU:\Software -Name Scripts
+
+Set-Location HKCU:\Software\Scripts
+
+New-ItemProperty -Path HKCU:\Software\Scripts -name "PSDriveName" -Value "ScriptShare"
+
+Get-ItemProperty .
+
+Get-PSProvider
+
+Set-Location C:
+
+Set-Location AD:
+
+New-PSDrive -Name USERS -Root "OU=USERS,OU=GRUPO2,DC=GRUPO2,DC=INTRA" -PSProvider ActiveDirectory
+
+Get-PSDrive
+
+Set-Location USERS:
+
+Get-ChildItem
+
+New-PSDrive -Name GROUPS -Root "OU=GROUPS,OU=GRUPO2,DC=GRUPO2,DC=INTRA" -PSProvider ActiveDirectory
+
+Set-Location GROUPS:
+
+Get-ChildItem
+
+New-Item -Name "CN=Inspetores" -ItemType Group -Path .
+
+Get-WmiObject -Namespace root -list | Sort-Object Name
+
+Get-WmiObject -Namespace root -List -Recurse | Select-Object -Unique __NAMESPACE | Sort-Object Name
+
+Get-WmiObject -Namespace root\CIMv2 -List | Sort-Object Name
+
+Get-WmiObject -Namespace root\CIMv2 -List | Where-Object name -like "*LogicalDisk*" | Sort-Object Name
+
+Get-CimInstance -ClassName Win32_LogicalDisk
+
+Get-Help Get-WmiObject -ShowWindow
+
+Get-WmiObject -Class Win32_Process | Format-Table
+
+Get-WmiObject -Class Win32_Service | Where-Object State -eq "Stopped" | Format-Table
+
+Get-WmiObject -Namespace root\CIMv2 -list | Where-Object name -like "*bios*" | Sort-Object Name
+
+Get-CimInstance -ClassName Win32_BIOS
+
+Get-WmiObject -Namespace root\CIMv2 -list | Where-Object name -like "*power*" | Sort-Object Name
+
+Get-WmiObject -Namespace root\CIMv2 -list | Where-Object name -like "*operating*"
+
+Get-WmiObject -Class Win32_OperatingSystem | Get-Member
+
+Get-WmiObject -Class Win32_OperatingSystem | Select-Object version,buildnumber,serialnumber
+
+Get-WmiObject -Namespace root\cimv2 -list | Where-Object Name -like "*system*" | Sort-Object Name
+
+Get-WmiObject -Class Win32_ComputerSystem | Format-List -Property *
+
+Get-WmiObject -Class Win32_ComputerSystem | Select-Object Manufacturer,Model,@{n="RAM";e={$PSItem.TotalPhysicalMemory}}
+
+Get-WmiObject -Namespace root\CIMv2 -list | Where-Object Name -like "*service*" | Sort-Object Name
+
+Get-WmiObject -Class Win32_Service | Select-Object DisplayName | Format-Table
+
+Get-WmiObject -Namespace root\cimv2 -list | where name -like "*user*" | Sort-Object Name
+
+Get-CimInstance -ClassName Win32_UserAccount | Get-Member
+
+Get-CimInstance -ClassName Win32_UserAccount | Select-Object Name, PasswordExpires
+
+Get-CimInstance -ClassName Win32_UserAccount | Format-Table -Property Name,SID
+
+Get-CimInstance -ClassName Win32_BIOS | Get-Member
+
+Get-CimInstance -ClassName Win32_NetworkAdapterConfiguration
+
+Invoke-CimMethod -ClassName Win32_OperatingSystem -ComputerName SRV-DC01 reboot
+
+Get-ChildItem variable:
+
+$PWD
+
+$PID
+
+$PSHOME
+
+Get-Variable
+
+$num1 = 10
+
+$num1
+
+$logFile = "c:\temp\log.txt"
+
+$logFile
+
+$user = Get-ADUser Thanos -Properties *
+
+$user.DistinguishedName
+$user.name
+$user.SID
+
+$service = Get-Service W32Time
+$service
+$service.Status
+$service.Name
+
+Write-Host "Teste"
+
+Write-Host "O caminho do arquivo de log é $logFile"
+
+$num1
+$num1 = $null
+$num1
+
+$num1 = 5
+$num2 = 7
+$sum = $num1 + $num2
+$sum
+
+$caminho = 'C:\temp\'
+$arquivo = 'log.txt'
+$caminhoCompleto = $caminho + $arquivo
+$caminhoCompleto
+
+[int]$num3 = "5"
+
+$num3.GetType()
+
+$num4 = "5"
+$num4.GetType()
+
+[datetime]$date = "November 21, 2023"
+$date
+$date.GetType()
+
+$num1 = 5
+$num1
+
+$logFile.GetType()
+$service.GetType()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
