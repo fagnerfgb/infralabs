@@ -7,6 +7,9 @@ Gerar relatório contendo (nome completo do usuário, login, departamento,data d
 Obter todos os computadores que não logam há mais de 90 dias
 Gerar relatório contendo (nome do computador, data do último logon, quantidade de dias)
 
+Obter todos os usuários onde a propriedade a senha nunca expira esteja habilitada
+Gerar relatório contendo (nome completo do usuário, login, departamento)
+
 Criar usuário no AD de maneira automatizada
 
 Criar usuário no banco de dados de maneira automatizada
